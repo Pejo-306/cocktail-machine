@@ -1,0 +1,531 @@
+EESchema Schematic File Version 4
+EELAYER 30 0
+EELAYER END
+$Descr A4 11693 8268
+encoding utf-8
+Sheet 2 2
+Title "Cocktail Machine - Valve Interface"
+Date "2020-04-13"
+Rev "1"
+Comp "Pesho & Valka Inc."
+Comment1 ""
+Comment2 ""
+Comment3 ""
+Comment4 ""
+$EndDescr
+Wire Wire Line
+	4300 6500 4300 6550
+$Comp
+L power:GND #PWR?
+U 1 1 5EB6054B
+P 4300 6550
+F 0 "#PWR?" H 4300 6300 50  0001 C CNN
+F 1 "GND" H 4305 6377 50  0000 C CNN
+F 2 "" H 4300 6550 50  0001 C CNN
+F 3 "" H 4300 6550 50  0001 C CNN
+	1    4300 6550
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	4300 1000 4300 950 
+$Comp
+L power:+5V #PWR?
+U 1 1 5EB60552
+P 4300 950
+F 0 "#PWR?" H 4300 800 50  0001 C CNN
+F 1 "+5V" H 4315 1123 50  0000 C CNN
+F 2 "" H 4300 950 50  0001 C CNN
+F 3 "" H 4300 950 50  0001 C CNN
+	1    4300 950 
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:+12V #PWR?
+U 1 1 5EB60558
+P 5050 2500
+F 0 "#PWR?" H 5050 2350 50  0001 C CNN
+F 1 "+12V" H 5065 2673 50  0000 C CNN
+F 2 "" H 5050 2500 50  0001 C CNN
+F 3 "" H 5050 2500 50  0001 C CNN
+	1    5050 2500
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	4900 2550 5050 2550
+Wire Wire Line
+	5050 2550 5050 2500
+$Comp
+L ulib_Relays:Relay_Module_8 K?
+U 1 1 5EB60560
+P 4300 3750
+AR Path="/5EB60560" Ref="K?"  Part="1" 
+AR Path="/5EB4C628/5EB60560" Ref="K?"  Part="1" 
+F 0 "K?" H 3950 6400 50  0000 C CNN
+F 1 "Relay_Module_8" H 4650 6400 50  0000 C CNN
+F 2 "" V 4780 4145 50  0001 C CNN
+F 3 "" H 4300 1475 50  0001 C CNN
+	1    4300 3750
+	1    0    0    -1  
+$EndComp
+NoConn ~ 4900 1250
+NoConn ~ 4900 1700
+NoConn ~ 4900 1475
+NoConn ~ 4900 1900
+NoConn ~ 4900 2125
+NoConn ~ 4900 2350
+NoConn ~ 4900 3000
+$Comp
+L Motor:Motor_DC M?
+U 1 1 5EB6056D
+P 5650 2700
+AR Path="/5EB6056D" Ref="M?"  Part="1" 
+AR Path="/5EB4C628/5EB6056D" Ref="M?"  Part="1" 
+F 0 "M?" H 5808 2696 50  0000 L CNN
+F 1 "Valve" H 5808 2605 50  0000 L CNN
+F 2 "" H 5650 2610 50  0001 C CNN
+F 3 "~" H 5650 2610 50  0001 C CNN
+	1    5650 2700
+	1    0    0    -1  
+$EndComp
+$Comp
+L Diode:1N4007 D?
+U 1 1 5EB60573
+P 5300 2750
+AR Path="/5EB60573" Ref="D?"  Part="1" 
+AR Path="/5EB4C628/5EB60573" Ref="D?"  Part="1" 
+F 0 "D?" V 5200 2850 50  0000 C CNN
+F 1 "1N4007" H 5300 2650 50  0000 C CNN
+F 2 "Diode_THT:D_DO-41_SOD81_P10.16mm_Horizontal" H 5300 2575 50  0001 C CNN
+F 3 "http://www.vishay.com/docs/88503/1n4001.pdf" H 5300 2750 50  0001 C CNN
+	1    5300 2750
+	0    1    1    0   
+$EndComp
+Wire Wire Line
+	5300 2900 5300 3000
+Wire Wire Line
+	5300 3000 5650 3000
+Wire Wire Line
+	5300 2600 5300 2500
+Wire Wire Line
+	5300 2500 5650 2500
+Wire Wire Line
+	5300 2500 5150 2500
+Connection ~ 5300 2500
+Wire Wire Line
+	5150 2775 4900 2775
+Wire Wire Line
+	5150 2500 5150 2775
+$Comp
+L power:GNDREF #PWR?
+U 1 1 5EB60581
+P 5750 3000
+AR Path="/5EB60581" Ref="#PWR?"  Part="1" 
+AR Path="/5EB4C628/5EB60581" Ref="#PWR?"  Part="1" 
+F 0 "#PWR?" H 5750 2750 50  0001 C CNN
+F 1 "GNDREF" V 5755 2872 50  0000 R CNN
+F 2 "" H 5750 3000 50  0001 C CNN
+F 3 "" H 5750 3000 50  0001 C CNN
+	1    5750 3000
+	0    -1   -1   0   
+$EndComp
+Wire Wire Line
+	5750 3000 5650 3000
+Connection ~ 5650 3000
+$Comp
+L power:+12V #PWR?
+U 1 1 5EB60589
+P 5050 3150
+F 0 "#PWR?" H 5050 3000 50  0001 C CNN
+F 1 "+12V" H 5065 3323 50  0000 C CNN
+F 2 "" H 5050 3150 50  0001 C CNN
+F 3 "" H 5050 3150 50  0001 C CNN
+	1    5050 3150
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	4900 3200 5050 3200
+Wire Wire Line
+	5050 3200 5050 3150
+$Comp
+L Motor:Motor_DC M?
+U 1 1 5EB60591
+P 5650 3350
+AR Path="/5EB60591" Ref="M?"  Part="1" 
+AR Path="/5EB4C628/5EB60591" Ref="M?"  Part="1" 
+F 0 "M?" H 5808 3346 50  0000 L CNN
+F 1 "Valve" H 5808 3255 50  0000 L CNN
+F 2 "" H 5650 3260 50  0001 C CNN
+F 3 "~" H 5650 3260 50  0001 C CNN
+	1    5650 3350
+	1    0    0    -1  
+$EndComp
+$Comp
+L Diode:1N4007 D?
+U 1 1 5EB60597
+P 5300 3400
+AR Path="/5EB60597" Ref="D?"  Part="1" 
+AR Path="/5EB4C628/5EB60597" Ref="D?"  Part="1" 
+F 0 "D?" V 5200 3500 50  0000 C CNN
+F 1 "1N4007" H 5300 3300 50  0000 C CNN
+F 2 "Diode_THT:D_DO-41_SOD81_P10.16mm_Horizontal" H 5300 3225 50  0001 C CNN
+F 3 "http://www.vishay.com/docs/88503/1n4001.pdf" H 5300 3400 50  0001 C CNN
+	1    5300 3400
+	0    1    1    0   
+$EndComp
+Wire Wire Line
+	5300 3550 5300 3650
+Wire Wire Line
+	5300 3650 5650 3650
+Wire Wire Line
+	5300 3250 5300 3150
+Wire Wire Line
+	5300 3150 5650 3150
+Wire Wire Line
+	5300 3150 5150 3150
+Connection ~ 5300 3150
+Wire Wire Line
+	5150 3425 4900 3425
+Wire Wire Line
+	5150 3150 5150 3425
+$Comp
+L power:GNDREF #PWR?
+U 1 1 5EB605A5
+P 5750 3650
+AR Path="/5EB605A5" Ref="#PWR?"  Part="1" 
+AR Path="/5EB4C628/5EB605A5" Ref="#PWR?"  Part="1" 
+F 0 "#PWR?" H 5750 3400 50  0001 C CNN
+F 1 "GNDREF" V 5755 3522 50  0000 R CNN
+F 2 "" H 5750 3650 50  0001 C CNN
+F 3 "" H 5750 3650 50  0001 C CNN
+	1    5750 3650
+	0    -1   -1   0   
+$EndComp
+Wire Wire Line
+	5750 3650 5650 3650
+Connection ~ 5650 3650
+NoConn ~ 4900 3650
+$Comp
+L power:+12V #PWR?
+U 1 1 5EB605AE
+P 5050 3800
+F 0 "#PWR?" H 5050 3650 50  0001 C CNN
+F 1 "+12V" H 5065 3973 50  0000 C CNN
+F 2 "" H 5050 3800 50  0001 C CNN
+F 3 "" H 5050 3800 50  0001 C CNN
+	1    5050 3800
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	4900 3850 5050 3850
+Wire Wire Line
+	5050 3850 5050 3800
+$Comp
+L Motor:Motor_DC M?
+U 1 1 5EB605B6
+P 5650 4000
+AR Path="/5EB605B6" Ref="M?"  Part="1" 
+AR Path="/5EB4C628/5EB605B6" Ref="M?"  Part="1" 
+F 0 "M?" H 5808 3996 50  0000 L CNN
+F 1 "Valve" H 5808 3905 50  0000 L CNN
+F 2 "" H 5650 3910 50  0001 C CNN
+F 3 "~" H 5650 3910 50  0001 C CNN
+	1    5650 4000
+	1    0    0    -1  
+$EndComp
+$Comp
+L Diode:1N4007 D?
+U 1 1 5EB605BC
+P 5300 4050
+AR Path="/5EB605BC" Ref="D?"  Part="1" 
+AR Path="/5EB4C628/5EB605BC" Ref="D?"  Part="1" 
+F 0 "D?" V 5200 4150 50  0000 C CNN
+F 1 "1N4007" H 5300 3950 50  0000 C CNN
+F 2 "Diode_THT:D_DO-41_SOD81_P10.16mm_Horizontal" H 5300 3875 50  0001 C CNN
+F 3 "http://www.vishay.com/docs/88503/1n4001.pdf" H 5300 4050 50  0001 C CNN
+	1    5300 4050
+	0    1    1    0   
+$EndComp
+Wire Wire Line
+	5300 4200 5300 4300
+Wire Wire Line
+	5300 4300 5650 4300
+Wire Wire Line
+	5300 3900 5300 3800
+Wire Wire Line
+	5300 3800 5650 3800
+Wire Wire Line
+	5300 3800 5150 3800
+Connection ~ 5300 3800
+Wire Wire Line
+	5150 4075 4900 4075
+Wire Wire Line
+	5150 3800 5150 4075
+$Comp
+L power:GNDREF #PWR?
+U 1 1 5EB605CA
+P 5750 4300
+AR Path="/5EB605CA" Ref="#PWR?"  Part="1" 
+AR Path="/5EB4C628/5EB605CA" Ref="#PWR?"  Part="1" 
+F 0 "#PWR?" H 5750 4050 50  0001 C CNN
+F 1 "GNDREF" V 5755 4172 50  0000 R CNN
+F 2 "" H 5750 4300 50  0001 C CNN
+F 3 "" H 5750 4300 50  0001 C CNN
+	1    5750 4300
+	0    -1   -1   0   
+$EndComp
+Wire Wire Line
+	5750 4300 5650 4300
+Connection ~ 5650 4300
+NoConn ~ 4900 4300
+$Comp
+L power:+12V #PWR?
+U 1 1 5EB605D3
+P 5050 4450
+F 0 "#PWR?" H 5050 4300 50  0001 C CNN
+F 1 "+12V" H 5065 4623 50  0000 C CNN
+F 2 "" H 5050 4450 50  0001 C CNN
+F 3 "" H 5050 4450 50  0001 C CNN
+	1    5050 4450
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	4900 4500 5050 4500
+Wire Wire Line
+	5050 4500 5050 4450
+$Comp
+L Motor:Motor_DC M?
+U 1 1 5EB605DB
+P 5650 4650
+AR Path="/5EB605DB" Ref="M?"  Part="1" 
+AR Path="/5EB4C628/5EB605DB" Ref="M?"  Part="1" 
+F 0 "M?" H 5808 4646 50  0000 L CNN
+F 1 "Valve" H 5808 4555 50  0000 L CNN
+F 2 "" H 5650 4560 50  0001 C CNN
+F 3 "~" H 5650 4560 50  0001 C CNN
+	1    5650 4650
+	1    0    0    -1  
+$EndComp
+$Comp
+L Diode:1N4007 D?
+U 1 1 5EB605E1
+P 5300 4700
+AR Path="/5EB605E1" Ref="D?"  Part="1" 
+AR Path="/5EB4C628/5EB605E1" Ref="D?"  Part="1" 
+F 0 "D?" V 5200 4800 50  0000 C CNN
+F 1 "1N4007" H 5300 4600 50  0000 C CNN
+F 2 "Diode_THT:D_DO-41_SOD81_P10.16mm_Horizontal" H 5300 4525 50  0001 C CNN
+F 3 "http://www.vishay.com/docs/88503/1n4001.pdf" H 5300 4700 50  0001 C CNN
+	1    5300 4700
+	0    1    1    0   
+$EndComp
+Wire Wire Line
+	5300 4850 5300 4950
+Wire Wire Line
+	5300 4950 5650 4950
+Wire Wire Line
+	5300 4550 5300 4450
+Wire Wire Line
+	5300 4450 5650 4450
+Wire Wire Line
+	5300 4450 5150 4450
+Connection ~ 5300 4450
+Wire Wire Line
+	5150 4725 4900 4725
+Wire Wire Line
+	5150 4450 5150 4725
+$Comp
+L power:GNDREF #PWR?
+U 1 1 5EB605EF
+P 5750 4950
+AR Path="/5EB605EF" Ref="#PWR?"  Part="1" 
+AR Path="/5EB4C628/5EB605EF" Ref="#PWR?"  Part="1" 
+F 0 "#PWR?" H 5750 4700 50  0001 C CNN
+F 1 "GNDREF" V 5755 4822 50  0000 R CNN
+F 2 "" H 5750 4950 50  0001 C CNN
+F 3 "" H 5750 4950 50  0001 C CNN
+	1    5750 4950
+	0    -1   -1   0   
+$EndComp
+Wire Wire Line
+	5750 4950 5650 4950
+Connection ~ 5650 4950
+NoConn ~ 4900 4950
+$Comp
+L power:+12V #PWR?
+U 1 1 5EB605F8
+P 5050 5100
+F 0 "#PWR?" H 5050 4950 50  0001 C CNN
+F 1 "+12V" H 5065 5273 50  0000 C CNN
+F 2 "" H 5050 5100 50  0001 C CNN
+F 3 "" H 5050 5100 50  0001 C CNN
+	1    5050 5100
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	4900 5150 5050 5150
+Wire Wire Line
+	5050 5150 5050 5100
+$Comp
+L Motor:Motor_DC M?
+U 1 1 5EB60600
+P 5650 5300
+AR Path="/5EB60600" Ref="M?"  Part="1" 
+AR Path="/5EB4C628/5EB60600" Ref="M?"  Part="1" 
+F 0 "M?" H 5808 5296 50  0000 L CNN
+F 1 "Valve" H 5808 5205 50  0000 L CNN
+F 2 "" H 5650 5210 50  0001 C CNN
+F 3 "~" H 5650 5210 50  0001 C CNN
+	1    5650 5300
+	1    0    0    -1  
+$EndComp
+$Comp
+L Diode:1N4007 D?
+U 1 1 5EB60606
+P 5300 5350
+AR Path="/5EB60606" Ref="D?"  Part="1" 
+AR Path="/5EB4C628/5EB60606" Ref="D?"  Part="1" 
+F 0 "D?" V 5200 5450 50  0000 C CNN
+F 1 "1N4007" H 5300 5250 50  0000 C CNN
+F 2 "Diode_THT:D_DO-41_SOD81_P10.16mm_Horizontal" H 5300 5175 50  0001 C CNN
+F 3 "http://www.vishay.com/docs/88503/1n4001.pdf" H 5300 5350 50  0001 C CNN
+	1    5300 5350
+	0    1    1    0   
+$EndComp
+Wire Wire Line
+	5300 5500 5300 5600
+Wire Wire Line
+	5300 5600 5650 5600
+Wire Wire Line
+	5300 5200 5300 5100
+Wire Wire Line
+	5300 5100 5650 5100
+Wire Wire Line
+	5300 5100 5150 5100
+Connection ~ 5300 5100
+Wire Wire Line
+	5150 5375 4900 5375
+Wire Wire Line
+	5150 5100 5150 5375
+$Comp
+L power:GNDREF #PWR?
+U 1 1 5EB60614
+P 5750 5600
+AR Path="/5EB60614" Ref="#PWR?"  Part="1" 
+AR Path="/5EB4C628/5EB60614" Ref="#PWR?"  Part="1" 
+F 0 "#PWR?" H 5750 5350 50  0001 C CNN
+F 1 "GNDREF" V 5755 5472 50  0000 R CNN
+F 2 "" H 5750 5600 50  0001 C CNN
+F 3 "" H 5750 5600 50  0001 C CNN
+	1    5750 5600
+	0    -1   -1   0   
+$EndComp
+Wire Wire Line
+	5750 5600 5650 5600
+Connection ~ 5650 5600
+NoConn ~ 4900 5600
+$Comp
+L power:+12V #PWR?
+U 1 1 5EB6061D
+P 5050 5750
+F 0 "#PWR?" H 5050 5600 50  0001 C CNN
+F 1 "+12V" H 5065 5923 50  0000 C CNN
+F 2 "" H 5050 5750 50  0001 C CNN
+F 3 "" H 5050 5750 50  0001 C CNN
+	1    5050 5750
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	4900 5800 5050 5800
+Wire Wire Line
+	5050 5800 5050 5750
+$Comp
+L Motor:Motor_DC M?
+U 1 1 5EB60625
+P 5650 5950
+AR Path="/5EB60625" Ref="M?"  Part="1" 
+AR Path="/5EB4C628/5EB60625" Ref="M?"  Part="1" 
+F 0 "M?" H 5808 5946 50  0000 L CNN
+F 1 "Valve" H 5808 5855 50  0000 L CNN
+F 2 "" H 5650 5860 50  0001 C CNN
+F 3 "~" H 5650 5860 50  0001 C CNN
+	1    5650 5950
+	1    0    0    -1  
+$EndComp
+$Comp
+L Diode:1N4007 D?
+U 1 1 5EB6062B
+P 5300 6000
+AR Path="/5EB6062B" Ref="D?"  Part="1" 
+AR Path="/5EB4C628/5EB6062B" Ref="D?"  Part="1" 
+F 0 "D?" V 5200 6100 50  0000 C CNN
+F 1 "1N4007" H 5300 5900 50  0000 C CNN
+F 2 "Diode_THT:D_DO-41_SOD81_P10.16mm_Horizontal" H 5300 5825 50  0001 C CNN
+F 3 "http://www.vishay.com/docs/88503/1n4001.pdf" H 5300 6000 50  0001 C CNN
+	1    5300 6000
+	0    1    1    0   
+$EndComp
+Wire Wire Line
+	5300 6150 5300 6250
+Wire Wire Line
+	5300 6250 5650 6250
+Wire Wire Line
+	5300 5850 5300 5750
+Wire Wire Line
+	5300 5750 5650 5750
+Wire Wire Line
+	5300 5750 5150 5750
+Connection ~ 5300 5750
+Wire Wire Line
+	5150 6025 4900 6025
+Wire Wire Line
+	5150 5750 5150 6025
+$Comp
+L power:GNDREF #PWR?
+U 1 1 5EB60639
+P 5750 6250
+AR Path="/5EB60639" Ref="#PWR?"  Part="1" 
+AR Path="/5EB4C628/5EB60639" Ref="#PWR?"  Part="1" 
+F 0 "#PWR?" H 5750 6000 50  0001 C CNN
+F 1 "GNDREF" V 5755 6122 50  0000 R CNN
+F 2 "" H 5750 6250 50  0001 C CNN
+F 3 "" H 5750 6250 50  0001 C CNN
+	1    5750 6250
+	0    -1   -1   0   
+$EndComp
+Wire Wire Line
+	5750 6250 5650 6250
+Connection ~ 5650 6250
+NoConn ~ 4900 6250
+Wire Wire Line
+	3700 1475 3550 1475
+Text HLabel 3550 1475 0    50   Input ~ 0
+CTRL8
+Wire Wire Line
+	3700 2125 3550 2125
+Text HLabel 3550 2125 0    50   Input ~ 0
+CTRL7
+Wire Wire Line
+	3700 2775 3550 2775
+Text HLabel 3550 2775 0    50   Input ~ 0
+CTRL6
+Wire Wire Line
+	3700 3425 3550 3425
+Text HLabel 3550 3425 0    50   Input ~ 0
+CTRL5
+Wire Wire Line
+	3700 4075 3550 4075
+Text HLabel 3550 4075 0    50   Input ~ 0
+CTRL4
+Wire Wire Line
+	3700 4725 3550 4725
+Text HLabel 3550 4725 0    50   Input ~ 0
+CTRL3
+Wire Wire Line
+	3700 5375 3550 5375
+Text HLabel 3550 5375 0    50   Input ~ 0
+CTRL2
+Wire Wire Line
+	3700 6025 3550 6025
+Text HLabel 3550 6025 0    50   Input ~ 0
+CTRL1
+$EndSCHEMATC
