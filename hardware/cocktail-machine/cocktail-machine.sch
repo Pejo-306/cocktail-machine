@@ -315,7 +315,7 @@ F 3 "" H 7600 4100 50  0001 C CNN
 $EndComp
 Wire Wire Line
 	5150 4450 5100 4450
-Text Label 5100 4450 2    50   ~ 0
+Text Label 5100 4150 2    50   ~ 0
 MOTOR_PWM
 NoConn ~ 5750 3750
 Wire Wire Line
@@ -396,13 +396,13 @@ Wire Wire Line
 Text Label 4800 1550 0    50   ~ 0
 T_IRQ
 Text Label 4800 1650 0    50   ~ 0
-MISO
+T_DO
 Text Label 4800 1750 0    50   ~ 0
-MOSI
+T_DIN
 Text Label 4800 1850 0    50   ~ 0
 T_~CS
 Text Label 4800 1950 0    50   ~ 0
-SCK
+T_CLK
 Wire Wire Line
 	5150 5250 5100 5250
 Wire Wire Line
@@ -479,10 +479,6 @@ Text Label 5100 5050 2    50   ~ 0
 LCD_~RESET
 Text Label 5100 5150 2    50   ~ 0
 LCD_~CS
-Text Label 5100 4750 2    50   ~ 0
-T_IRQ
-Text Label 5100 4850 2    50   ~ 0
-T_~CS
 Wire Wire Line
 	5100 4550 5150 4550
 Wire Wire Line
@@ -517,15 +513,12 @@ Wire Wire Line
 	7000 2600 6950 2600
 Text Label 6950 2600 2    50   ~ 0
 IR_TX
-Text Label 5100 4550 2    50   ~ 0
+Text Label 5100 4250 2    50   ~ 0
 IR_RX
-Text Label 5100 4650 2    50   ~ 0
+Text Label 5100 4350 2    50   ~ 0
 IR_TX
 NoConn ~ 6150 5450
 NoConn ~ 6150 5550
-NoConn ~ 5150 4350
-NoConn ~ 5150 4250
-NoConn ~ 5150 4150
 NoConn ~ 6150 4550
 NoConn ~ 6150 4350
 NoConn ~ 6150 4150
@@ -879,4 +872,20 @@ Wire Wire Line
 NoConn ~ 5850 3750
 Text Notes 6650 1300 0    50   ~ 0
 IR TRANSMITTER/RECEIVER
+Wire Wire Line
+	5150 4150 5100 4150
+Wire Wire Line
+	5150 4250 5100 4250
+Wire Wire Line
+	5150 4350 5100 4350
+Text Label 5100 4450 2    50   ~ 0
+T_IRQ
+Text Label 5100 4550 2    50   ~ 0
+T_DO
+Text Label 5100 4650 2    50   ~ 0
+T_DIN
+Text Label 5100 4750 2    50   ~ 0
+T_~CS
+Text Label 5100 4850 2    50   ~ 0
+T_CLK
 $EndSCHEMATC
