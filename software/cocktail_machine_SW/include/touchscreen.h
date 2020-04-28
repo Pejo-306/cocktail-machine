@@ -7,8 +7,6 @@
 
 // touchscreen module details
 #define LCD_MODEL   ILI9341
-#define LCD_RES_X   240
-#define LCD_RES_Y   320
 #define LCD_CS      10    
 #define LCD_CD      8
 #define LCD_RST     9
@@ -18,16 +16,6 @@
 #define T_DIN       5
 #define T_DOUT      4
 #define T_IRQ       3
-
-// color values
-#define BLACK   0x0000
-#define WHITE   0xFFFF
-#define RED     0xF800
-#define GREEN   0x07E0
-#define BLUE    0x001F
-
-#define FONT_SIZE_X 5
-#define FONT_SIZE_Y 8
 
 // LCD initialization
 LCDWIKI_SPI lcd(LCD_MODEL, LCD_CS, LCD_CD, LCD_RST, LCD_LED);
