@@ -1,19 +1,52 @@
-#include <LCDWIKI_GUI.h>    // core graphics library
-#include <LCDWIKI_SPI.h>    // hardware-specific library
-#include <LCDWIKI_TOUCH.h>  //touch screen library
+#include "include/GUI.h"
 
-#define LCD_MODEL   ILI9341
-#define LCD_CS      10    
-#define LCD_CD      8
-#define LCD_RST     9
-#define LCD_LED     -1   // if you don't need to control the LED pin, you should set it to -1 and set it to 3.3V
-#define T_CLK       7
-#define T_CS        6
-#define T_DIN       5
-#define T_DOUT      4
-#define T_IRQ       3
+#include <string.h>
 
-// LCD module initialization
-LCDWIKI_SPI lcd(LCD_MODEL, LCD_CS, LCD_CD, LCD_RST, LCD_LED);
-// Touch driver initialization
-LCDWIKI_TOUCH touch(T_CS, T_CLK, T_DOUT, T_DIN, T_IRQ);
+#include "include/touchscreen.h"
+
+void draw_main_menu() {
+    // background
+    lcd.Fill_Screen(BLACK);
+
+    lcd.Set_Text_Mode(0);
+
+    // display title
+    lcd.Set_Text_colour(WHITE);
+    lcd.Set_Text_Back_colour(BLACK);
+    lcd.Set_Text_Size(4);
+    lcd.Print_String("COCKTAIL", CENTER, 20);
+    lcd.Print_String("MACHINE", CENTER, 20 + 4 * FONT_SIZE_Y);
+
+    // buttons are round rectangles with 180*40 (x*y) with a radius of 6 
+    // display 'Make cocktail' button
+    lcd.Set_Draw_color(WHITE);
+    lcd.Fill_Round_Rectangle(30, 120, 210, 160, 6);
+    lcd.Set_Text_colour(BLACK);
+    lcd.Set_Text_Back_colour(WHITE);
+    lcd.Set_Text_Size(2);
+    lcd.Print_String("Make cocktail", CENTER, 120 + 14);
+
+    // display 'New recipe' button
+    // the button is a round rectangle with 180*40 (x*y) with a radius of 6 
+    lcd.Set_Draw_color(WHITE);
+    lcd.Fill_Round_Rectangle(30, 180, 210, 220, 6);
+    lcd.Set_Text_colour(BLACK);
+    lcd.Set_Text_Back_colour(WHITE);
+    lcd.Set_Text_Size(2);
+    lcd.Print_String("New recipe", CENTER, 180 + 14);
+
+    // display 'Config' button
+    // the button is a round rectangle with 180*40 (x*y) with a radius of 6 
+    lcd.Set_Draw_color(WHITE);
+    lcd.Fill_Round_Rectangle(30, 240, 210, 280, 6);
+    lcd.Set_Text_colour(BLACK);
+    lcd.Set_Text_Back_colour(WHITE);
+    lcd.Set_Text_Size(2);
+    lcd.Print_String("Config", CENTER, 240 + 14);
+
+    // display company name
+    lcd.Set_Text_colour(WHITE);
+    lcd.Set_Text_Back_colour(BLACK);
+    lcd.Set_Text_Size(1);
+    lcd.Print_String("Pesho & Valka Inc.", CENTER, LCD_RES_Y - 20);
+}
