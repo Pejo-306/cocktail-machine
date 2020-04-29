@@ -49,7 +49,21 @@ void draw_main_menu() {
 }
 
 void process_main_menu() {
-    
+    if ((touch.x >= 30 && touch.x <= 210) && (touch.y >= 120 && touch.y <= 160)) {
+        // check if 'Make cocktail' button has been pressed
+        g_active_menu = COCKTAIL_SELECT_MENU;
+        g_draw_menu_functions[COCKTAIL_SELECT_MENU]();
+    } else if ((touch.x >= 30 && touch.x <= 210) && (touch.y >= 180 && touch.y <= 220)) {
+        // check if 'New recipe' button has been pressed
+        _draw_not_implemented();
+        delay(500);
+        _remove_not_implemented();
+    } else if ((touch.x >= 30 && touch.x <= 210) && (touch.y >= 240 && touch.y <= 280)) {
+        // check if 'Config' button has been pressed
+        _draw_not_implemented();
+        delay(500);
+        _remove_not_implemented();
+    }
 }
 
 void draw_cocktail_select_menu() {
@@ -200,6 +214,23 @@ static void _draw_company_name() {
     lcd.Set_Text_Back_colour(BLACK);
     lcd.Set_Text_Size(1);
     lcd.Print_String("Pesho & Valka Inc.", CENTER, LCD_RES_Y - 20);
+}
+
+// NOTE: this function should be deprecated in the future
+static void _draw_not_implemented() {
+    lcd.Set_Draw_color(RED);
+    lcd.Fill_Rectangle(0, 0, LCD_RES_X, 18);
+    lcd.Set_Text_Mode(NO_OVERLAP);
+    lcd.Set_Text_colour(WHITE);
+    lcd.Set_Text_Back_colour(RED);
+    lcd.Set_Text_Size(1);
+    lcd.Print_String("NOT IMPLEMENTED YET!", CENTER, 5);
+}
+
+// NOTE: this function should be deprecated in the future
+static void _remove_not_implemented() {
+    lcd.Set_Draw_color(BLACK);
+    lcd.Fill_Rectangle(0, 0, LCD_RES_X, 18);
 }
 
 #undef _DOTS_STR

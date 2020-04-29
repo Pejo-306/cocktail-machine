@@ -27,11 +27,13 @@
 #define WAIT_BACKGROUND_OPTI_FLAG   2
 #define WAIT_FILL_OPTI_FLAG   3
 
-struct wait_menu_params_t {
-    byte stage;
-    byte optimize_flags;
-};
+#define MAIN_MENU               0
+#define COCKTAIL_SELECT_MENU    1
+#define ADD_ICE_MENU            2
+#define WAIT_MENU               3
 
+extern void (*g_draw_menu_functions[])();
+extern void (*g_process_menu_functions[])();
 extern byte g_active_menu;
 
 void draw_main_menu();

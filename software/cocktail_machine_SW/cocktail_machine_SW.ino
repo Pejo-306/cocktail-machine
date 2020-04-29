@@ -1,20 +1,15 @@
 #include "include/touchscreen.h"
 #include "include/GUI.h"
 
-#define MAIN_MENU               0
-#define COCKTAIL_SELECT_MENU    1
-#define ADD_ICE_MENU            2
-#define WAIT_MENU               3
-
 void adapted_draw_wait_menu();
 
-static void (*draw_menu_functions[])() = {
+void (*g_draw_menu_functions[])() = {
     &draw_main_menu,
     &draw_cocktail_select_menu,
     &draw_add_ice_menu,
     &adapted_draw_wait_menu
 };
-static void (*process_menu_functions[])() = {
+void (*g_process_menu_functions[])() = {
     &process_main_menu,
     &process_cocktail_select_menu,
     &process_add_ice_menu,
@@ -30,20 +25,16 @@ void setup() {
     touch.TP_Set_Rotation(TP_ROTATION_270DEG);
     touch.TP_Init(lcd.Get_Rotation(), lcd.Get_Display_Width(), lcd.Get_Display_Height());
     // draw the main menu
-    // draw_menu_functions[g_active_menu]();
-    g_active_menu = WAIT_MENU;
+    g_draw_menu_functions[g_active_menu]();
 }
 
 void loop() {
-    draw_menu_functions[g_active_menu]();
-    /*
     touch.TP_Scan(TP_SCREEN_COORDINATES);
     if (touch.TP_Get_State() & TP_PRES_DOWN) {
         lcd.Set_Draw_color(WHITE);
         lcd.Draw_Pixel(touch.x, touch.y);
-        process_menu_functions[g_active_menu]();
+        g_process_menu_functions[g_active_menu]();
     }
-    */
 }
 
 void adapted_draw_wait_menu() {
@@ -76,37 +67,3 @@ void adapted_draw_wait_menu() {
         delay(1000);
     }
 }
-
-/*
-void loop() {
-    static struct wait_menu_params_t wait_menu_params;
-
-    for (byte stage = 0; stage <= 8; ++stage) {
-        if (stage == WAIT_STAGE_NO_CUP) {  // no optimization
-            wait_menu_params.optimize_flags |= (1 << WAIT_FILL_OPTI_FLAG);
-            wait_menu_params.optimize_flags &= ~(1 << WAIT_TEXT_OPTI_FLAG)
-                                            & ~(1 << WAIT_COMPANY_NAME_OPTI_FLAG)
-                                            & ~(1 << WAIT_BACKGROUND_OPTI_FLAG);
-        } else if (stage == WAIT_STAGE_FINISHED) {
-            wait_menu_params.optimize_flags |= (1 << WAIT_COMPANY_NAME_OPTI_FLAG) 
-                                            | (1 << WAIT_BACKGROUND_OPTI_FLAG);
-            wait_menu_params.optimize_flags &= ~(1 << WAIT_TEXT_OPTI_FLAG)
-                                            & ~(1 << WAIT_FILL_OPTI_FLAG);
-        } else if (stage == 1) {
-            wait_menu_params.optimize_flags |= (1 << WAIT_COMPANY_NAME_OPTI_FLAG) 
-                                            | (1 << WAIT_BACKGROUND_OPTI_FLAG);
-            wait_menu_params.optimize_flags &= ~(1 << WAIT_TEXT_OPTI_FLAG)
-                                            & ~(1 << WAIT_FILL_OPTI_FLAG);
-        } else {  // full optimization
-            wait_menu_params.optimize_flags |= (1 << WAIT_COMPANY_NAME_OPTI_FLAG)
-                                            | (1 << WAIT_TEXT_OPTI_FLAG);
-            wait_menu_params.optimize_flags &= ~(1 << WAIT_FILL_OPTI_FLAG)
-                                            & ~(1 << WAIT_BACKGROUND_OPTI_FLAG);
-        }
-
-        wait_menu_params.stage = stage;
-        draw_menu_functions[WAIT_MENU](&wait_menu_params);
-        delay(1000);
-    }
-}
-*/
