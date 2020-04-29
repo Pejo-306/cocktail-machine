@@ -101,7 +101,7 @@ void draw_cocktail_select_menu() {
     
     // display 'Back' button
     lcd.Set_Draw_color(WHITE);
-    lcd.Fill_Rectangle(0, LCD_RES_Y - 40, 110, LCD_RES_Y);
+    lcd.Fill_Rectangle(0, LCD_RES_Y-40, 110, LCD_RES_Y);
     lcd.Set_Text_colour(BLACK);
     lcd.Set_Text_Back_colour(WHITE);
     lcd.Set_Text_Size(2);
@@ -109,15 +109,23 @@ void draw_cocktail_select_menu() {
 
     // display 'Make' button
     lcd.Set_Draw_color(WHITE);
-    lcd.Fill_Rectangle(LCD_RES_X - 110, LCD_RES_Y - 40, LCD_RES_X, LCD_RES_Y);
+    lcd.Fill_Rectangle(LCD_RES_X-110, LCD_RES_Y-40, LCD_RES_X, LCD_RES_Y);
     lcd.Set_Text_colour(BLACK);
     lcd.Set_Text_Back_colour(WHITE);
     lcd.Set_Text_Size(2);
-    lcd.Print_String("Make", LCD_RES_X - 78, LCD_RES_Y - 28);
+    lcd.Print_String("Make", LCD_RES_X-78, LCD_RES_Y-28);
 }
 
 void process_cocktail_select_menu() {
-    
+    if ((touch.x >= 0 && touch.x <= 110) && (touch.y >= LCD_RES_Y-40 && touch.y <= LCD_RES_Y)) {
+        // check if 'Back' button has been pressed
+        g_active_menu = MAIN_MENU;
+        g_draw_menu_functions[MAIN_MENU]();
+    } else if ((touch.x >= LCD_RES_X-110 && touch.x <= LCD_RES_X) && (touch.y >= LCD_RES_Y-40 && touch.y <= LCD_RES_Y)) {
+        // check if 'Make' button has been pressed
+        g_active_menu = ADD_ICE_MENU;
+        g_draw_menu_functions[ADD_ICE_MENU]();
+    }
 }
 
 void draw_add_ice_menu() {
