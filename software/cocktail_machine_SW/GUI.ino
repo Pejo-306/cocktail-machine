@@ -98,3 +98,42 @@ void draw_cocktail_select_menu() {
     lcd.Set_Text_Size(2);
     lcd.Print_String("Make", LCD_RES_X - 78, LCD_RES_Y - 28);
 }
+
+void draw_add_ice_menu() {
+    // background
+    lcd.Fill_Screen(BLACK);
+
+    lcd.Set_Text_Mode(0);
+
+    // display title
+    lcd.Set_Text_colour(WHITE);
+    lcd.Set_Text_Back_colour(BLACK);
+    lcd.Set_Text_Size(4);
+    lcd.Print_String("Add ice?", CENTER, 20);
+
+    
+    // buttons are round rectangles with 180*40 (x*y) with a radius of 6 
+    // display 'Make cocktail' button
+    lcd.Set_Draw_color(WHITE);
+    lcd.Fill_Round_Rectangle(30, 120, 210, 160, 6);
+    lcd.Set_Text_colour(BLACK);
+    lcd.Set_Text_Back_colour(WHITE);
+    lcd.Set_Text_Size(2);
+    lcd.Print_String("Yes", CENTER, 120 + 14);
+
+    // display 'New recipe' button
+    lcd.Set_Draw_color(WHITE);
+    lcd.Fill_Round_Rectangle(30, 180, 210, 220, 6);
+    lcd.Set_Text_colour(BLACK);
+    lcd.Set_Text_Back_colour(WHITE);
+    lcd.Set_Text_Size(2);
+    lcd.Print_String("No", CENTER, 180 + 14);
+
+    // display 'Config' button
+    lcd.Set_Draw_color(WHITE);
+    lcd.Fill_Round_Rectangle(30, 240, 210, 280, 6);
+    lcd.Set_Text_colour(BLACK);
+    lcd.Set_Text_Back_colour(WHITE);
+    lcd.Set_Text_Size(2);
+    lcd.Print_String("Back", CENTER, 240 + 14);
+}

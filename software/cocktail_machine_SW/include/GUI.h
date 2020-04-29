@@ -18,5 +18,7 @@ void draw_main_menu();
 
 void draw_cocktail_select_menu();
 
+void draw_add_ice_menu();
+
 #endif
 
