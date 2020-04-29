@@ -147,15 +147,15 @@ void draw_add_ice_menu() {
     lcd.Set_Text_colour(BLACK);
     lcd.Set_Text_Back_colour(WHITE);
     lcd.Set_Text_Size(2);
-    lcd.Print_String("Yes", CENTER, 120 + 14);
+    lcd.Print_String("Yes", CENTER, 120+14);
 
-    // display cancelation button
+    // display cancellation button
     lcd.Set_Draw_color(WHITE);
     lcd.Fill_Round_Rectangle(30, 180, 210, 220, 6);
     lcd.Set_Text_colour(BLACK);
     lcd.Set_Text_Back_colour(WHITE);
     lcd.Set_Text_Size(2);
-    lcd.Print_String("No", CENTER, 180 + 14);
+    lcd.Print_String("No", CENTER, 180+14);
 
     // display 'Back' button
     lcd.Set_Draw_color(WHITE);
@@ -163,11 +163,23 @@ void draw_add_ice_menu() {
     lcd.Set_Text_colour(BLACK);
     lcd.Set_Text_Back_colour(WHITE);
     lcd.Set_Text_Size(2);
-    lcd.Print_String("Back", CENTER, 240 + 14);
+    lcd.Print_String("Back", CENTER, 240+14);
 }
 
 void process_add_ice_menu() {
-    
+    if ((touch.x >= 30 && touch.x <= 210) && (touch.y >= 120 && touch.y <= 160)) {
+        // check if confirmation button has been pressed
+        g_active_menu = WAIT_MENU;
+        g_draw_menu_functions[WAIT_MENU]();
+    } else if ((touch.x >= 30 && touch.x <= 210) && (touch.y >= 180 && touch.y <= 220)) {
+        // check if cancellation button has been pressed
+        g_active_menu = WAIT_MENU;
+        g_draw_menu_functions[WAIT_MENU]();
+    } else if ((touch.x >= 30 && touch.x <= 210) && (touch.y >= 240 && touch.y <= 280)) {
+        // check if 'Back' button has been pressed
+        g_active_menu = COCKTAIL_SELECT_MENU;
+        g_draw_menu_functions[COCKTAIL_SELECT_MENU]();
+    }
 }
 
 void draw_wait_menu(byte optimize_flags, byte stage) {
