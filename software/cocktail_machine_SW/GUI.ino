@@ -4,11 +4,13 @@
 
 #include "include/touchscreen.h"
 
-void draw_main_menu() {
+#define _DOTS_STR "......."
+
+void draw_main_menu(void *null_param) {
     // background
     lcd.Fill_Screen(BLACK);
 
-    lcd.Set_Text_Mode(0);
+    lcd.Set_Text_Mode(NO_OVERLAP);
 
     // display title
     lcd.Set_Text_colour(WHITE);
@@ -43,17 +45,14 @@ void draw_main_menu() {
     lcd.Print_String("Config", CENTER, 240 + 14);
 
     // display company name
-    lcd.Set_Text_colour(WHITE);
-    lcd.Set_Text_Back_colour(BLACK);
-    lcd.Set_Text_Size(1);
-    lcd.Print_String("Pesho & Valka Inc.", CENTER, LCD_RES_Y - 20);
+    _draw_company_name();
 }
 
-void draw_cocktail_select_menu() {
+void draw_cocktail_select_menu(void *null_param) {
     // background
     lcd.Fill_Screen(BLACK);
 
-    lcd.Set_Text_Mode(0);
+    lcd.Set_Text_Mode(NO_OVERLAP);
 
     // display ingredients
     lcd.Set_Text_colour(WHITE);
@@ -99,21 +98,20 @@ void draw_cocktail_select_menu() {
     lcd.Print_String("Make", LCD_RES_X - 78, LCD_RES_Y - 28);
 }
 
-void draw_add_ice_menu() {
+void draw_add_ice_menu(void *null_param) {
     // background
     lcd.Fill_Screen(BLACK);
 
-    lcd.Set_Text_Mode(0);
+    lcd.Set_Text_Mode(NO_OVERLAP);
 
     // display title
     lcd.Set_Text_colour(WHITE);
     lcd.Set_Text_Back_colour(BLACK);
     lcd.Set_Text_Size(4);
     lcd.Print_String("Add ice?", CENTER, 20);
-
     
     // buttons are round rectangles with 180*40 (x*y) with a radius of 6 
-    // display 'Make cocktail' button
+    // display confirmation button
     lcd.Set_Draw_color(WHITE);
     lcd.Fill_Round_Rectangle(30, 120, 210, 160, 6);
     lcd.Set_Text_colour(BLACK);
@@ -121,7 +119,7 @@ void draw_add_ice_menu() {
     lcd.Set_Text_Size(2);
     lcd.Print_String("Yes", CENTER, 120 + 14);
 
-    // display 'New recipe' button
+    // display cancelation button
     lcd.Set_Draw_color(WHITE);
     lcd.Fill_Round_Rectangle(30, 180, 210, 220, 6);
     lcd.Set_Text_colour(BLACK);
@@ -129,7 +127,7 @@ void draw_add_ice_menu() {
     lcd.Set_Text_Size(2);
     lcd.Print_String("No", CENTER, 180 + 14);
 
-    // display 'Config' button
+    // display 'Back' button
     lcd.Set_Draw_color(WHITE);
     lcd.Fill_Round_Rectangle(30, 240, 210, 280, 6);
     lcd.Set_Text_colour(BLACK);
@@ -137,3 +135,56 @@ void draw_add_ice_menu() {
     lcd.Set_Text_Size(2);
     lcd.Print_String("Back", CENTER, 240 + 14);
 }
+
+void draw_wait_menu(void *params_p) {
+    struct wait_menu_params_t *params = (struct wait_menu_params_t *)params_p;
+    char dots[8];
+    
+    // background
+    if (params->optimize_flags & (1 << WAIT_BACKGROUND_OPTI_FLAG)) {
+        lcd.Set_Draw_color(BLACK);
+        lcd.Fill_Rectangle(0, 120, LCD_RES_X, LCD_RES_Y - 21);
+    } else if (params->optimize_flags & (1 << WAIT_FILL_OPTI_FLAG)) {
+        lcd.Fill_Screen(BLACK);
+    }   
+
+    lcd.Set_Text_Mode(NO_OVERLAP);
+
+    // display title
+    if (params->stage == WAIT_STAGE_NO_CUP) {
+        lcd.Set_Text_colour(WHITE);
+        lcd.Set_Text_Back_colour(BLACK);
+        lcd.Set_Text_Size(1);
+        lcd.Print_String("Please, place a cup!", CENTER, 120);
+    } else if (params->stage == WAIT_STAGE_FINISHED) {
+        lcd.Set_Text_colour(WHITE);
+        lcd.Set_Text_Back_colour(BLACK);
+        lcd.Set_Text_Size(1);
+        lcd.Print_String("Done making cocktail!", CENTER, 120);
+    } else {
+        lcd.Set_Text_colour(WHITE);
+        lcd.Set_Text_Back_colour(BLACK);
+        lcd.Set_Text_Size(4);
+        if (!(params->optimize_flags & (1 << WAIT_TEXT_OPTI_FLAG))) {
+            lcd.Print_String("Please", CENTER, 120);
+            lcd.Print_String("wait", CENTER, 120 + 4 * FONT_SIZE_Y);    
+        }
+        strncpy(dots, _DOTS_STR, params->stage);
+        dots[params->stage] = '\0';
+        lcd.Print_String(dots, CENTER, 120 + 2 * 4 * FONT_SIZE_Y);
+    }
+    
+    // display company name
+    if (!(params->optimize_flags & (1 << WAIT_COMPANY_NAME_OPTI_FLAG)))
+        _draw_company_name();
+}
+
+static void _draw_company_name() {
+    lcd.Set_Text_Mode(NO_OVERLAP);
+    lcd.Set_Text_colour(WHITE);
+    lcd.Set_Text_Back_colour(BLACK);
+    lcd.Set_Text_Size(1);
+    lcd.Print_String("Pesho & Valka Inc.", CENTER, LCD_RES_Y - 20);
+}
+
+#undef _DOTS_STR
