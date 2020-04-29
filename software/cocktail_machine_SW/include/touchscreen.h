@@ -17,6 +17,17 @@
 #define T_DOUT      4
 #define T_IRQ       3
 
+#define LCD_ROTATION_0DEG       0
+#define LCD_ROTATION_90DEG      1
+#define LCD_ROTATION_180DEG     2
+#define LCD_ROTATION_270DEG     3
+#define TP_ROTATION_0DEG        0
+#define TP_ROTATION_90DEG       1
+#define TP_ROTATION_180DEG      2
+#define TP_ROTATION_270DEG      3
+#define TP_SCREEN_COORDINATES   0
+#define TP_PHYSICAL_COORDINATES 1
+
 // LCD initialization
 LCDWIKI_SPI lcd(LCD_MODEL, LCD_CS, LCD_CD, LCD_RST, LCD_LED);
 // Touch driver initialization

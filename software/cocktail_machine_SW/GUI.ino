@@ -6,7 +6,7 @@
 
 #define _DOTS_STR "......."
 
-void draw_main_menu(void *null_param) {
+void draw_main_menu() {
     // background
     lcd.Fill_Screen(BLACK);
 
@@ -48,7 +48,11 @@ void draw_main_menu(void *null_param) {
     _draw_company_name();
 }
 
-void draw_cocktail_select_menu(void *null_param) {
+void process_main_menu() {
+    
+}
+
+void draw_cocktail_select_menu() {
     // background
     lcd.Fill_Screen(BLACK);
 
@@ -98,7 +102,11 @@ void draw_cocktail_select_menu(void *null_param) {
     lcd.Print_String("Make", LCD_RES_X - 78, LCD_RES_Y - 28);
 }
 
-void draw_add_ice_menu(void *null_param) {
+void process_cocktail_select_menu() {
+    
+}
+
+void draw_add_ice_menu() {
     // background
     lcd.Fill_Screen(BLACK);
 
@@ -136,27 +144,30 @@ void draw_add_ice_menu(void *null_param) {
     lcd.Print_String("Back", CENTER, 240 + 14);
 }
 
-void draw_wait_menu(void *params_p) {
-    struct wait_menu_params_t *params = (struct wait_menu_params_t *)params_p;
+void process_add_ice_menu() {
+    
+}
+
+void draw_wait_menu(byte optimize_flags, byte stage) {
     char dots[8];
     
     // background
-    if (params->optimize_flags & (1 << WAIT_BACKGROUND_OPTI_FLAG)) {
+    if (optimize_flags & (1 << WAIT_BACKGROUND_OPTI_FLAG)) {
         lcd.Set_Draw_color(BLACK);
         lcd.Fill_Rectangle(0, 120, LCD_RES_X, LCD_RES_Y - 21);
-    } else if (params->optimize_flags & (1 << WAIT_FILL_OPTI_FLAG)) {
+    } else if (optimize_flags & (1 << WAIT_FILL_OPTI_FLAG)) {
         lcd.Fill_Screen(BLACK);
     }   
 
     lcd.Set_Text_Mode(NO_OVERLAP);
 
     // display title
-    if (params->stage == WAIT_STAGE_NO_CUP) {
+    if (stage == WAIT_STAGE_NO_CUP) {
         lcd.Set_Text_colour(WHITE);
         lcd.Set_Text_Back_colour(BLACK);
         lcd.Set_Text_Size(1);
         lcd.Print_String("Please, place a cup!", CENTER, 120);
-    } else if (params->stage == WAIT_STAGE_FINISHED) {
+    } else if (stage == WAIT_STAGE_FINISHED) {
         lcd.Set_Text_colour(WHITE);
         lcd.Set_Text_Back_colour(BLACK);
         lcd.Set_Text_Size(1);
@@ -165,18 +176,22 @@ void draw_wait_menu(void *params_p) {
         lcd.Set_Text_colour(WHITE);
         lcd.Set_Text_Back_colour(BLACK);
         lcd.Set_Text_Size(4);
-        if (!(params->optimize_flags & (1 << WAIT_TEXT_OPTI_FLAG))) {
+        if (!(optimize_flags & (1 << WAIT_TEXT_OPTI_FLAG))) {
             lcd.Print_String("Please", CENTER, 120);
             lcd.Print_String("wait", CENTER, 120 + 4 * FONT_SIZE_Y);    
         }
-        strncpy(dots, _DOTS_STR, params->stage);
-        dots[params->stage] = '\0';
+        strncpy(dots, _DOTS_STR, stage);
+        dots[stage] = '\0';
         lcd.Print_String(dots, CENTER, 120 + 2 * 4 * FONT_SIZE_Y);
     }
     
     // display company name
-    if (!(params->optimize_flags & (1 << WAIT_COMPANY_NAME_OPTI_FLAG)))
+    if (!(optimize_flags & (1 << WAIT_COMPANY_NAME_OPTI_FLAG)))
         _draw_company_name();
+}
+
+void process_wait_menu() {
+    
 }
 
 static void _draw_company_name() {

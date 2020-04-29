@@ -32,13 +32,23 @@ struct wait_menu_params_t {
     byte optimize_flags;
 };
 
-void draw_main_menu(void *null_param);
+extern byte g_active_menu;
 
-void draw_cocktail_select_menu(void *null_param);
+void draw_main_menu();
 
-void draw_add_ice_menu(void *null_param);
+void process_main_menu();
 
-void draw_wait_menu(void *params_p);
+void draw_cocktail_select_menu();
+
+void process_cocktail_select_menu();
+
+void draw_add_ice_menu();
+
+void process_add_ice_menu();
+
+void draw_wait_menu(byte optimize_flags, byte stage);
+
+void process_wait_menu();
 
 #endif
 
