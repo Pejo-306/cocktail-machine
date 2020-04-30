@@ -13,9 +13,9 @@
 #define LCD_LED     -1   // if you don't need to control the LED pin, you should set it to -1
 #define T_CLK       7
 #define T_CS        6
-#define T_DIN       5
+#define T_DIN       0
 #define T_DOUT      4
-#define T_IRQ       3
+#define T_IRQ       2
 
 #define LCD_ROTATION_0DEG       0
 #define LCD_ROTATION_90DEG      1

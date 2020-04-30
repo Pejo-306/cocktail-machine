@@ -5,7 +5,7 @@ $Descr A4 11693 8268
 encoding utf-8
 Sheet 1 2
 Title "Cocktail Machine"
-Date "2020-04-26"
+Date "2020-04-30"
 Rev "1"
 Comp "Pesho & Valka Inc."
 Comment1 ""
@@ -23,17 +23,6 @@ F 2 "Module:Arduino_UNO_R3" H 5800 3700 50  0001 L CNN
 F 3 "https://www.arduino.cc/en/Main/arduinoBoardUno" H 5450 5800 50  0001 C CNN
 	1    5650 4750
 	1    0    0    -1  
-$EndComp
-$Comp
-L Device:LED D?
-U 1 1 5E943420
-P 7650 1800
-F 0 "D?" V 7700 1950 50  0000 C CNN
-F 1 "IR_LED" V 7600 2000 50  0000 C CNN
-F 2 "" H 7650 1800 50  0001 C CNN
-F 3 "~" H 7650 1800 50  0001 C CNN
-	1    7650 1800
-	0    -1   -1   0   
 $EndComp
 $Comp
 L Interface_Optical:TSDP341xx U?
@@ -189,17 +178,6 @@ F 3 "" H 7650 1600 50  0001 C CNN
 $EndComp
 Wire Wire Line
 	7650 1950 7650 2050
-$Comp
-L Device:R R?
-U 1 1 5E9752B5
-P 7650 2200
-F 0 "R?" H 7720 2246 50  0000 L CNN
-F 1 "27R/1|2W" H 7720 2155 50  0000 L CNN
-F 2 "" V 7580 2200 50  0001 C CNN
-F 3 "~" H 7650 2200 50  0001 C CNN
-	1    7650 2200
-	1    0    0    -1  
-$EndComp
 Wire Wire Line
 	7650 2350 7650 2400
 $Comp
@@ -315,7 +293,7 @@ F 3 "" H 7600 4100 50  0001 C CNN
 $EndComp
 Wire Wire Line
 	5150 4450 5100 4450
-Text Label 5100 4150 2    50   ~ 0
+Text Label 5100 4450 2    50   ~ 0
 MOTOR_PWM
 NoConn ~ 5750 3750
 Wire Wire Line
@@ -501,7 +479,7 @@ L Device:R R?
 U 1 1 5EC4295D
 P 7150 2600
 F 0 "R?" V 6943 2600 50  0000 C CNN
-F 1 "6.2k" V 7034 2600 50  0000 C CNN
+F 1 "6.8k" V 7034 2600 50  0000 C CNN
 F 2 "" V 7080 2600 50  0001 C CNN
 F 3 "~" H 7150 2600 50  0001 C CNN
 	1    7150 2600
@@ -511,11 +489,11 @@ Wire Wire Line
 	7300 2600 7350 2600
 Wire Wire Line
 	7000 2600 6950 2600
-Text Label 6950 2600 2    50   ~ 0
+Text Label 6600 2600 2    50   ~ 0
 IR_TX
 Text Label 5100 4250 2    50   ~ 0
 IR_RX
-Text Label 5100 4350 2    50   ~ 0
+Text Label 5100 4650 2    50   ~ 0
 IR_TX
 NoConn ~ 6150 5450
 NoConn ~ 6150 5550
@@ -523,13 +501,7 @@ NoConn ~ 6150 4550
 NoConn ~ 6150 4350
 NoConn ~ 6150 4150
 Wire Notes Line
-	6650 3150 10800 3150
-Wire Notes Line
 	10800 3150 10800 1300
-Wire Notes Line
-	10800 1300 6650 1300
-Wire Notes Line
-	6650 1300 6650 3150
 $Comp
 L Connector:Barrel_Jack J?
 U 1 1 5EA69E6D
@@ -878,14 +850,55 @@ Wire Wire Line
 	5150 4250 5100 4250
 Wire Wire Line
 	5150 4350 5100 4350
-Text Label 5100 4450 2    50   ~ 0
+Text Label 5100 4350 2    50   ~ 0
 T_IRQ
 Text Label 5100 4550 2    50   ~ 0
 T_DO
-Text Label 5100 4650 2    50   ~ 0
+Text Label 5100 4150 2    50   ~ 0
 T_DIN
 Text Label 5100 4750 2    50   ~ 0
 T_~CS
 Text Label 5100 4850 2    50   ~ 0
 T_CLK
+$Comp
+L Device:R R?
+U 1 1 5EAD7C8F
+P 6800 2600
+F 0 "R?" V 6593 2600 50  0000 C CNN
+F 1 "200R" V 6684 2600 50  0000 C CNN
+F 2 "" V 6730 2600 50  0001 C CNN
+F 3 "~" H 6800 2600 50  0001 C CNN
+	1    6800 2600
+	0    1    1    0   
+$EndComp
+Wire Wire Line
+	6650 2600 6600 2600
+Wire Notes Line
+	6300 1300 6300 3150
+Wire Notes Line
+	6300 3150 10800 3150
+Wire Notes Line
+	6300 1300 10800 1300
+$Comp
+L Device:LED D?
+U 1 1 5E943420
+P 7650 1800
+F 0 "D?" V 7700 1950 50  0000 C CNN
+F 1 "IR_LED" V 7600 2000 50  0000 C CNN
+F 2 "" H 7650 1800 50  0001 C CNN
+F 3 "~" H 7650 1800 50  0001 C CNN
+	1    7650 1800
+	0    -1   -1   0   
+$EndComp
+$Comp
+L Device:R R?
+U 1 1 5E9752B5
+P 7650 2200
+F 0 "R?" H 7720 2246 50  0000 L CNN
+F 1 "30R/0.6W" H 7720 2155 50  0000 L CNN
+F 2 "" V 7580 2200 50  0001 C CNN
+F 3 "~" H 7650 2200 50  0001 C CNN
+	1    7650 2200
+	1    0    0    -1  
+$EndComp
 $EndSCHEMATC
