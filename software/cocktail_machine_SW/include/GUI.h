@@ -32,7 +32,7 @@
 #define ADD_ICE_MENU            2
 #define WAIT_MENU               3
 
-extern void (*g_draw_menu_functions[])();
+extern void (*g_draw_menu_functions[])(void *);
 extern void (*g_process_menu_functions[])(struct touch_record_t);
 extern byte g_active_menu;
 

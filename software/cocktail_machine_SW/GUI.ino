@@ -59,7 +59,7 @@ void process_main_menu(struct touch_record_t touch_record) {
             && (touch_record.y2 >= 120 && touch_record.y2 <= 160)) {
         // check if 'Make cocktail' button has been pressed
         g_active_menu = COCKTAIL_SELECT_MENU;
-        g_draw_menu_functions[COCKTAIL_SELECT_MENU]();
+        g_draw_menu_functions[COCKTAIL_SELECT_MENU](NULL);
     } else if ((touch_record.x2 >= 30 && touch_record.x2 <= 210) 
             && (touch_record.y2 >= 180 && touch_record.y2 <= 220)) {
         // check if 'New recipe' button has been pressed
@@ -75,14 +75,20 @@ void process_main_menu(struct touch_record_t touch_record) {
     }
 }
 
-void draw_cocktail_select_menu() {
+void draw_cocktail_select_menu(bool optimize) {
     char temp[_QUANTITY_STR_MAXLEN + 1];
     struct recipe_t recipe = get_recipe(_selected_recipe_index);
     char ingredient[MAX_LEN_INGREDIENT + 1];
     char *token;
     
     // background
-    lcd.Fill_Screen(BLACK);
+    if (optimize) {
+        lcd.Set_Draw_color(BLACK);
+        lcd.Fill_Rectangle(40, 26, LCD_RES_X - 40, 26 + 16 * MAX_INGREDIENTS);
+        lcd.Fill_Rectangle(0, 140 + (140 - FONT_SIZE_Y * 3 * 2) / 2, LCD_RES_X, 140 + (140 - FONT_SIZE_Y * 3 * 2) / 2 + FONT_SIZE_Y * 3 * 2);
+    } else {
+        lcd.Fill_Screen(BLACK);
+    }
 
     lcd.Set_Text_Mode(NO_OVERLAP);
 
@@ -98,12 +104,13 @@ void draw_cocktail_select_menu() {
     }
 
     // display cocktail name
-    lcd.Set_Draw_color(RED);
-    lcd.Fill_Rectangle(0, 139, 240, 141);
-    lcd.Fill_Rectangle(0, 277, 240, 279);
+    if (!optimize) {
+        lcd.Set_Draw_color(RED);
+        lcd.Fill_Rectangle(0, 139, 240, 141);
+        lcd.Fill_Rectangle(0, 277, 240, 279);
+    }
     lcd.Set_Text_colour(WHITE);
     lcd.Set_Text_Back_colour(BLACK);
-
     if (strlen(recipe.name) >= MAX_LEN_RECIPE / 2) {
         if (strlen(token = strtok(recipe.name, " ")) >= MAX_LEN_RECIPE / 2) {
             lcd.Set_Text_Size(1);
@@ -117,37 +124,40 @@ void draw_cocktail_select_menu() {
         lcd.Set_Text_Size(3);
         lcd.Print_String(recipe.name, CENTER, 140 + (140 - FONT_SIZE_Y * 3 * 2) / 2);    
     }
-    
-    // display 'Back' button
-    lcd.Set_Draw_color(WHITE);
-    lcd.Fill_Rectangle(0, LCD_RES_Y-40, 110, LCD_RES_Y);
-    lcd.Set_Text_colour(BLACK);
-    lcd.Set_Text_Back_colour(WHITE);
-    lcd.Set_Text_Size(2);
-    lcd.Print_String("Back", 32, LCD_RES_Y - 28);
 
-    // display 'Make' button
-    lcd.Set_Draw_color(WHITE);
-    lcd.Fill_Rectangle(LCD_RES_X-110, LCD_RES_Y-40, LCD_RES_X, LCD_RES_Y);
-    lcd.Set_Text_colour(BLACK);
-    lcd.Set_Text_Back_colour(WHITE);
-    lcd.Set_Text_Size(2);
-    lcd.Print_String("Make", LCD_RES_X-78, LCD_RES_Y-28);
+    if (!optimize) {
+        // display 'Back' button
+        lcd.Set_Draw_color(WHITE);
+        lcd.Fill_Rectangle(0, LCD_RES_Y-40, 110, LCD_RES_Y);
+        lcd.Set_Text_colour(BLACK);
+        lcd.Set_Text_Back_colour(WHITE);
+        lcd.Set_Text_Size(2);
+        lcd.Print_String("Back", 32, LCD_RES_Y - 28);
+    
+        // display 'Make' button
+        lcd.Set_Draw_color(WHITE);
+        lcd.Fill_Rectangle(LCD_RES_X-110, LCD_RES_Y-40, LCD_RES_X, LCD_RES_Y);
+        lcd.Set_Text_colour(BLACK);
+        lcd.Set_Text_Back_colour(WHITE);
+        lcd.Set_Text_Size(2);
+        lcd.Print_String("Make", LCD_RES_X-78, LCD_RES_Y-28);
+    }
 }
 
 void process_cocktail_select_menu(struct touch_record_t touch_record) {
     uint16_t vertical_diff;
+    bool optimize;
     
     if ((touch_record.x2 >= 0 && touch_record.x2 <= 110)
             && (touch_record.y2 >= LCD_RES_Y-40 && touch_record.y2 <= LCD_RES_Y)) {
         // check if 'Back' button has been pressed
         g_active_menu = MAIN_MENU;
-        g_draw_menu_functions[MAIN_MENU]();
+        g_draw_menu_functions[MAIN_MENU](NULL);
     } else if ((touch_record.x2 >= LCD_RES_X-110 && touch_record.x2 <= LCD_RES_X)
             && (touch_record.y2 >= LCD_RES_Y-40 && touch_record.y2 <= LCD_RES_Y)) {
         // check if 'Make' button has been pressed
         g_active_menu = ADD_ICE_MENU;
-        g_draw_menu_functions[ADD_ICE_MENU]();
+        g_draw_menu_functions[ADD_ICE_MENU](NULL);
     } else if (touch_record.elapsed_time <= _SWIPE_ALLOWED_TIME) {  // detect swipe
         vertical_diff = (touch_record.y2 > touch_record.y1) ? (touch_record.y2 - touch_record.y1)
                                                             : (touch_record.y1 - touch_record.y2);
@@ -159,7 +169,8 @@ void process_cocktail_select_menu(struct touch_record_t touch_record) {
                     _selected_recipe_index = 0;  // reset to first recipe
                 else
                     ++_selected_recipe_index;
-                g_draw_menu_functions[COCKTAIL_SELECT_MENU]();
+                optimize = true;
+                g_draw_menu_functions[COCKTAIL_SELECT_MENU](&optimize);
             } else if (touch_record.x1 < touch_record.x2
                     && (touch_record.x2 - touch_record.x1) >= (LCD_RES_X / 6)) {  // swipe right
                 // change to previous cocktail recipe
@@ -167,7 +178,8 @@ void process_cocktail_select_menu(struct touch_record_t touch_record) {
                     _selected_recipe_index = NRECIPES - 1;  // reset to last recipe
                 else
                     --_selected_recipe_index;
-                g_draw_menu_functions[COCKTAIL_SELECT_MENU]();
+                optimize = true;
+                g_draw_menu_functions[COCKTAIL_SELECT_MENU](&optimize);
             }
         }
     }
@@ -216,17 +228,17 @@ void process_add_ice_menu(struct touch_record_t touch_record) {
             && (touch_record.y2 >= 120 && touch_record.y2 <= 160)) {
         // check if confirmation button has been pressed
         g_active_menu = WAIT_MENU;
-        g_draw_menu_functions[WAIT_MENU]();
+        g_draw_menu_functions[WAIT_MENU](NULL);
     } else if ((touch_record.x2 >= 30 && touch_record.x2 <= 210)
             && (touch_record.y2 >= 180 && touch_record.y2 <= 220)) {
         // check if cancellation button has been pressed
         g_active_menu = WAIT_MENU;
-        g_draw_menu_functions[WAIT_MENU]();
+        g_draw_menu_functions[WAIT_MENU](NULL);
     } else if ((touch_record.x2 >= 30 && touch_record.x2 <= 210)
             && (touch_record.y2 >= 240 && touch_record.y2 <= 280)) {
         // check if 'Back' button has been pressed
         g_active_menu = COCKTAIL_SELECT_MENU;
-        g_draw_menu_functions[COCKTAIL_SELECT_MENU]();
+        g_draw_menu_functions[COCKTAIL_SELECT_MENU](NULL);
     }
 }
 
