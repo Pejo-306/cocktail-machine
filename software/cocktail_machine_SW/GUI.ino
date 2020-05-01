@@ -10,6 +10,8 @@
 #define _QUANTITY_STR_MAXLEN 6
 #define _SWIPE_ALLOWED_TIME 200
 
+static byte _selected_recipe_index = 0;
+
 void draw_main_menu() {
     // background
     lcd.Fill_Screen(BLACK);
@@ -75,8 +77,7 @@ void process_main_menu(struct touch_record_t touch_record) {
 
 void draw_cocktail_select_menu() {
     char temp[_QUANTITY_STR_MAXLEN + 1];
-    byte recipe_index = 3;
-    struct recipe_t recipe = get_recipe(recipe_index);
+    struct recipe_t recipe = get_recipe(_selected_recipe_index);
     char ingredient[MAX_LEN_INGREDIENT + 1];
     char *token;
     
@@ -153,54 +154,20 @@ void process_cocktail_select_menu(struct touch_record_t touch_record) {
         if (vertical_diff <= LCD_RES_Y / 6) {
             if (touch_record.x1 > touch_record.x2
                     && (touch_record.x2 - touch_record.x1) <= -(LCD_RES_X / 6)) {  // swipe left
-                lcd.Fill_Screen(RED);
-                lcd.Set_Draw_color(GREEN);
-                lcd.Draw_Pixel(touch_record.x1, touch_record.y1);
-                lcd.Set_Draw_color(WHITE);
-                lcd.Draw_Pixel(touch_record.x2, touch_record.y2);
-                
-                char str[100] = "";
-                
-                lcd.Set_Text_colour(WHITE);
-                lcd.Set_Text_Back_colour(BLACK);
-                lcd.Set_Text_Size(1);
-                itoa(touch_record.x1, str, 10);
-                strcat(str, " x1");
-                lcd.Print_String(str, 0, 0);
-                itoa(touch_record.y1, str, 10);
-                strcat(str, " y1");
-                lcd.Print_String(str, 0, 16);
-                itoa(touch_record.x2, str, 10);
-                strcat(str, " x2");
-                lcd.Print_String(str, 0, 32);
-                itoa(touch_record.y2, str, 10);
-                strcat(str, " y2");
-                lcd.Print_String(str, 0, 48);
+                // change to next cocktail recipe
+                if (_selected_recipe_index == NRECIPES - 1)
+                    _selected_recipe_index = 0;  // reset to first recipe
+                else
+                    ++_selected_recipe_index;
+                g_draw_menu_functions[COCKTAIL_SELECT_MENU]();
             } else if (touch_record.x1 < touch_record.x2
                     && (touch_record.x2 - touch_record.x1) >= (LCD_RES_X / 6)) {  // swipe right
-                lcd.Fill_Screen(BLUE);
-                lcd.Set_Draw_color(GREEN);
-                lcd.Draw_Pixel(touch_record.x1, touch_record.y1);
-                lcd.Set_Draw_color(WHITE);
-                lcd.Draw_Pixel(touch_record.x2, touch_record.y2);
-    
-                            char str[100] = "";
-                
-                lcd.Set_Text_colour(WHITE);
-                lcd.Set_Text_Back_colour(BLACK);
-                lcd.Set_Text_Size(1);
-                itoa(touch_record.x1, str, 10);
-                strcat(str, " x1");
-                lcd.Print_String(str, 0, 0);
-                itoa(touch_record.y1, str, 10);
-                strcat(str, " y1");
-                lcd.Print_String(str, 0, 16);
-                itoa(touch_record.x2, str, 10);
-                strcat(str, " x2");
-                lcd.Print_String(str, 0, 32);
-                itoa(touch_record.y2, str, 10);
-                strcat(str, " y2");
-                lcd.Print_String(str, 0, 48);
+                // change to previous cocktail recipe
+                if (_selected_recipe_index == 0)
+                    _selected_recipe_index = NRECIPES - 1;  // reset to last recipe
+                else
+                    --_selected_recipe_index;
+                g_draw_menu_functions[COCKTAIL_SELECT_MENU]();
             }
         }
     }
