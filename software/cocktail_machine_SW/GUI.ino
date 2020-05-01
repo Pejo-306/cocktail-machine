@@ -8,6 +8,7 @@
 
 #define _DOTS_STR "......."
 #define _QUANTITY_STR_MAXLEN 6
+#define _SWIPE_ALLOWED_TIME 200
 
 void draw_main_menu() {
     // background
@@ -51,17 +52,20 @@ void draw_main_menu() {
     _draw_company_name();
 }
 
-void process_main_menu() {
-    if ((touch.x >= 30 && touch.x <= 210) && (touch.y >= 120 && touch.y <= 160)) {
+void process_main_menu(struct touch_record_t touch_record) {
+    if ((touch_record.x2 >= 30 && touch_record.x2 <= 210) 
+            && (touch_record.y2 >= 120 && touch_record.y2 <= 160)) {
         // check if 'Make cocktail' button has been pressed
         g_active_menu = COCKTAIL_SELECT_MENU;
         g_draw_menu_functions[COCKTAIL_SELECT_MENU]();
-    } else if ((touch.x >= 30 && touch.x <= 210) && (touch.y >= 180 && touch.y <= 220)) {
+    } else if ((touch_record.x2 >= 30 && touch_record.x2 <= 210) 
+            && (touch_record.y2 >= 180 && touch_record.y2 <= 220)) {
         // check if 'New recipe' button has been pressed
         _draw_not_implemented();
         delay(500);
         _remove_not_implemented();
-    } else if ((touch.x >= 30 && touch.x <= 210) && (touch.y >= 240 && touch.y <= 280)) {
+    } else if ((touch_record.x2 >= 30 && touch_record.x2 <= 210)
+            && (touch_record.y2 >= 240 && touch_record.y2 <= 280)) {
         // check if 'Config' button has been pressed
         _draw_not_implemented();
         delay(500);
@@ -130,15 +134,75 @@ void draw_cocktail_select_menu() {
     lcd.Print_String("Make", LCD_RES_X-78, LCD_RES_Y-28);
 }
 
-void process_cocktail_select_menu() {
-    if ((touch.x >= 0 && touch.x <= 110) && (touch.y >= LCD_RES_Y-40 && touch.y <= LCD_RES_Y)) {
+void process_cocktail_select_menu(struct touch_record_t touch_record) {
+    uint16_t vertical_diff;
+    
+    if ((touch_record.x2 >= 0 && touch_record.x2 <= 110)
+            && (touch_record.y2 >= LCD_RES_Y-40 && touch_record.y2 <= LCD_RES_Y)) {
         // check if 'Back' button has been pressed
         g_active_menu = MAIN_MENU;
         g_draw_menu_functions[MAIN_MENU]();
-    } else if ((touch.x >= LCD_RES_X-110 && touch.x <= LCD_RES_X) && (touch.y >= LCD_RES_Y-40 && touch.y <= LCD_RES_Y)) {
+    } else if ((touch_record.x2 >= LCD_RES_X-110 && touch_record.x2 <= LCD_RES_X)
+            && (touch_record.y2 >= LCD_RES_Y-40 && touch_record.y2 <= LCD_RES_Y)) {
         // check if 'Make' button has been pressed
         g_active_menu = ADD_ICE_MENU;
         g_draw_menu_functions[ADD_ICE_MENU]();
+    } else if (touch_record.elapsed_time <= _SWIPE_ALLOWED_TIME) {  // detect swipe
+        vertical_diff = (touch_record.y2 > touch_record.y1) ? (touch_record.y2 - touch_record.y1)
+                                                            : (touch_record.y1 - touch_record.y2);
+        if (vertical_diff <= LCD_RES_Y / 6) {
+            if (touch_record.x1 > touch_record.x2
+                    && (touch_record.x2 - touch_record.x1) <= -(LCD_RES_X / 6)) {  // swipe left
+                lcd.Fill_Screen(RED);
+                lcd.Set_Draw_color(GREEN);
+                lcd.Draw_Pixel(touch_record.x1, touch_record.y1);
+                lcd.Set_Draw_color(WHITE);
+                lcd.Draw_Pixel(touch_record.x2, touch_record.y2);
+                
+                char str[100] = "";
+                
+                lcd.Set_Text_colour(WHITE);
+                lcd.Set_Text_Back_colour(BLACK);
+                lcd.Set_Text_Size(1);
+                itoa(touch_record.x1, str, 10);
+                strcat(str, " x1");
+                lcd.Print_String(str, 0, 0);
+                itoa(touch_record.y1, str, 10);
+                strcat(str, " y1");
+                lcd.Print_String(str, 0, 16);
+                itoa(touch_record.x2, str, 10);
+                strcat(str, " x2");
+                lcd.Print_String(str, 0, 32);
+                itoa(touch_record.y2, str, 10);
+                strcat(str, " y2");
+                lcd.Print_String(str, 0, 48);
+            } else if (touch_record.x1 < touch_record.x2
+                    && (touch_record.x2 - touch_record.x1) >= (LCD_RES_X / 6)) {  // swipe right
+                lcd.Fill_Screen(BLUE);
+                lcd.Set_Draw_color(GREEN);
+                lcd.Draw_Pixel(touch_record.x1, touch_record.y1);
+                lcd.Set_Draw_color(WHITE);
+                lcd.Draw_Pixel(touch_record.x2, touch_record.y2);
+    
+                            char str[100] = "";
+                
+                lcd.Set_Text_colour(WHITE);
+                lcd.Set_Text_Back_colour(BLACK);
+                lcd.Set_Text_Size(1);
+                itoa(touch_record.x1, str, 10);
+                strcat(str, " x1");
+                lcd.Print_String(str, 0, 0);
+                itoa(touch_record.y1, str, 10);
+                strcat(str, " y1");
+                lcd.Print_String(str, 0, 16);
+                itoa(touch_record.x2, str, 10);
+                strcat(str, " x2");
+                lcd.Print_String(str, 0, 32);
+                itoa(touch_record.y2, str, 10);
+                strcat(str, " y2");
+                lcd.Print_String(str, 0, 48);
+            }
+        }
     }
 }
 
@@ -180,16 +244,19 @@ void draw_add_ice_menu() {
     lcd.Print_String("Back", CENTER, 240+14);
 }
 
-void process_add_ice_menu() {
-    if ((touch.x >= 30 && touch.x <= 210) && (touch.y >= 120 && touch.y <= 160)) {
+void process_add_ice_menu(struct touch_record_t touch_record) {
+    if ((touch_record.x2 >= 30 && touch_record.x2 <= 210)
+            && (touch_record.y2 >= 120 && touch_record.y2 <= 160)) {
         // check if confirmation button has been pressed
         g_active_menu = WAIT_MENU;
         g_draw_menu_functions[WAIT_MENU]();
-    } else if ((touch.x >= 30 && touch.x <= 210) && (touch.y >= 180 && touch.y <= 220)) {
+    } else if ((touch_record.x2 >= 30 && touch_record.x2 <= 210)
+            && (touch_record.y2 >= 180 && touch_record.y2 <= 220)) {
         // check if cancellation button has been pressed
         g_active_menu = WAIT_MENU;
         g_draw_menu_functions[WAIT_MENU]();
-    } else if ((touch.x >= 30 && touch.x <= 210) && (touch.y >= 240 && touch.y <= 280)) {
+    } else if ((touch_record.x2 >= 30 && touch_record.x2 <= 210)
+            && (touch_record.y2 >= 240 && touch_record.y2 <= 280)) {
         // check if 'Back' button has been pressed
         g_active_menu = COCKTAIL_SELECT_MENU;
         g_draw_menu_functions[COCKTAIL_SELECT_MENU]();
@@ -238,7 +305,7 @@ void draw_wait_menu(byte optimize_flags, byte stage) {
         _draw_company_name();
 }
 
-void process_wait_menu() {
+void process_wait_menu(struct touch_record_t touch_record) {
     
 }
 
@@ -269,3 +336,4 @@ static void _remove_not_implemented() {
 
 #undef _DOTS_STR
 #undef _QUANTITY_STR_MAXLEN
+#undef _SWIPE_ALLOWED_TIME

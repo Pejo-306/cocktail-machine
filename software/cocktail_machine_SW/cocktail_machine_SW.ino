@@ -9,7 +9,7 @@ void (*g_draw_menu_functions[])() = {
     &draw_add_ice_menu,
     &adapted_draw_wait_menu
 };
-void (*g_process_menu_functions[])() = {
+void (*g_process_menu_functions[])(struct touch_record_t) = {
     &process_main_menu,
     &process_cocktail_select_menu,
     &process_add_ice_menu,
@@ -30,11 +30,21 @@ void setup() {
 }
 
 void loop() {
+    static unsigned long start_time;
+    static struct touch_record_t touch_record;
+    
     touch.TP_Scan(TP_SCREEN_COORDINATES);
-    if (touch.TP_Get_State() & TP_PRES_DOWN) {
-        lcd.Set_Draw_color(WHITE);
-        lcd.Draw_Pixel(touch.x, touch.y);
-        g_process_menu_functions[g_active_menu]();
+    if (touch.x < LCD_RES_X && touch.y < LCD_RES_Y && (touch.TP_Get_State() & TP_PRES_DOWN)) {
+        start_time = millis();
+        touch_record.x1 = touch.x;
+        touch_record.y1 = touch.y;
+        while (touch.TP_Scan(TP_SCREEN_COORDINATES));
+        touch_record.elapsed_time = millis() - start_time;    
+        if (touch.x < LCD_RES_X && touch.y < LCD_RES_Y) {
+            touch_record.x2 = touch.x;
+            touch_record.y2 = touch.y;
+            g_process_menu_functions[g_active_menu](touch_record);    
+        }
     }
 }
 
