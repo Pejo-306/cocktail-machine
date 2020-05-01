@@ -15,7 +15,8 @@ void (*g_process_menu_functions[])() = {
     &process_add_ice_menu,
     &process_wait_menu
 };
-byte g_active_menu = MAIN_MENU;
+// byte g_active_menu = MAIN_MENU;
+byte g_active_menu = COCKTAIL_SELECT_MENU;
 
 void setup() {
     // initialize LCD display
