@@ -5,12 +5,13 @@
 
 #include "include/touchscreen.h"
 #include "include/recipes.h"
+#include "include/cocktail_making.h"
 
 #define _DOTS_STR "......."
 #define _QUANTITY_STR_MAXLEN 6
 #define _SWIPE_ALLOWED_TIME 200
 
-static byte _selected_recipe_index = 0;
+static byte _selected_recipe_index = INGREDIENT1;
 
 void draw_main_menu() {
     // background
@@ -227,13 +228,11 @@ void process_add_ice_menu(struct touch_record_t touch_record) {
     if ((touch_record.x2 >= 30 && touch_record.x2 <= 210)
             && (touch_record.y2 >= 120 && touch_record.y2 <= 160)) {
         // check if confirmation button has been pressed
-        g_active_menu = WAIT_MENU;
-        g_draw_menu_functions[WAIT_MENU](NULL);
+        make_cocktail(_selected_recipe_index, true);
     } else if ((touch_record.x2 >= 30 && touch_record.x2 <= 210)
             && (touch_record.y2 >= 180 && touch_record.y2 <= 220)) {
         // check if cancellation button has been pressed
-        g_active_menu = WAIT_MENU;
-        g_draw_menu_functions[WAIT_MENU](NULL);
+        make_cocktail(_selected_recipe_index, false);
     } else if ((touch_record.x2 >= 30 && touch_record.x2 <= 210)
             && (touch_record.y2 >= 240 && touch_record.y2 <= 280)) {
         // check if 'Back' button has been pressed
