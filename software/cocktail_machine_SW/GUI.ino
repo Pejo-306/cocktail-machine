@@ -11,6 +11,12 @@
 #define _QUANTITY_STR_MAXLEN 6
 #define _SWIPE_ALLOWED_TIME 200
 
+static void _draw_company_name();
+
+static void _draw_not_implemented();
+
+static void _remove_not_implemented();
+
 static byte _selected_recipe_index = INGREDIENT1;
 
 void draw_main_menu() {

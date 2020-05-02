@@ -21,7 +21,6 @@
 #define OVERLAP     1
 
 #define WAIT_STAGE_NO_CUP           0
-#define WAIT_STAGE_SKIP_NO_CUP      9
 #define WAIT_STAGE_FINISHED         8
 #define WAIT_COMPANY_NAME_OPTI_FLAG 0
 #define WAIT_TEXT_OPTI_FLAG         1

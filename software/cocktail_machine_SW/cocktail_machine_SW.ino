@@ -1,13 +1,7 @@
+#include "include/cocktail_machine_SW.h"
+
 #include "include/touchscreen.h"
 #include "include/GUI.h"
-
-void adapted_draw_main_menu(void *);
-
-void adapted_draw_cocktail_select_menu(void *);
-
-void adapted_draw_add_ice_menu(void *);
-
-void adapted_draw_wait_menu(void *);
 
 void (*g_draw_menu_functions[])(void *) = {
     &adapted_draw_main_menu,
@@ -67,36 +61,38 @@ void adapted_draw_add_ice_menu(void *) {
     draw_add_ice_menu();
 }
 
-void adapted_draw_wait_menu(void *stage_p) {
-    byte optimize_flags = 0;
-    byte stage = *((byte *)stage_p);
+void adapted_draw_wait_menu(void *draw_wait_menu_params_p) {
+    struct draw_wait_menu_params_t *draw_wait_menu_params = (struct draw_wait_menu_params_t *)draw_wait_menu_params_p;
+    byte optimize_flags;
+    byte stage = draw_wait_menu_params->stage;
 
-    if (stage == WAIT_STAGE_SKIP_NO_CUP) {  // no optimization
+    if (draw_wait_menu_params->optimize_flags == NO_OPTIMIZATION) {
         optimize_flags |= (1 << WAIT_FILL_OPTI_FLAG);
         optimize_flags &= ~(1 << WAIT_TEXT_OPTI_FLAG)
                         & ~(1 << WAIT_COMPANY_NAME_OPTI_FLAG)
                         & ~(1 << WAIT_BACKGROUND_OPTI_FLAG);
-        stage = 1;
-    } else if (stage == WAIT_STAGE_NO_CUP) {  // no optimization
-        optimize_flags |= (1 << WAIT_FILL_OPTI_FLAG);
-        optimize_flags &= ~(1 << WAIT_TEXT_OPTI_FLAG)
-                        & ~(1 << WAIT_COMPANY_NAME_OPTI_FLAG)
-                        & ~(1 << WAIT_BACKGROUND_OPTI_FLAG);
-    } else if (stage == WAIT_STAGE_FINISHED) {
-        optimize_flags |= (1 << WAIT_COMPANY_NAME_OPTI_FLAG) 
-                        | (1 << WAIT_BACKGROUND_OPTI_FLAG);
-        optimize_flags &= ~(1 << WAIT_TEXT_OPTI_FLAG)
-                        & ~(1 << WAIT_FILL_OPTI_FLAG);
-    } else if (stage == 1) {
-        optimize_flags |= (1 << WAIT_COMPANY_NAME_OPTI_FLAG) 
-                        | (1 << WAIT_BACKGROUND_OPTI_FLAG);
-        optimize_flags &= ~(1 << WAIT_TEXT_OPTI_FLAG)
-                        & ~(1 << WAIT_FILL_OPTI_FLAG);
-    } else {  // full optimization
-        optimize_flags |= (1 << WAIT_COMPANY_NAME_OPTI_FLAG)
-                        | (1 << WAIT_TEXT_OPTI_FLAG);
-        optimize_flags &= ~(1 << WAIT_FILL_OPTI_FLAG)
-                        & ~(1 << WAIT_BACKGROUND_OPTI_FLAG);
+    } else {
+        if (stage == WAIT_STAGE_NO_CUP) {  // no optimization
+            optimize_flags |= (1 << WAIT_FILL_OPTI_FLAG);
+            optimize_flags &= ~(1 << WAIT_TEXT_OPTI_FLAG)
+                            & ~(1 << WAIT_COMPANY_NAME_OPTI_FLAG)
+                            & ~(1 << WAIT_BACKGROUND_OPTI_FLAG);
+        } else if (stage == WAIT_STAGE_FINISHED) {
+            optimize_flags |= (1 << WAIT_COMPANY_NAME_OPTI_FLAG) 
+                            | (1 << WAIT_BACKGROUND_OPTI_FLAG);
+            optimize_flags &= ~(1 << WAIT_TEXT_OPTI_FLAG)
+                            & ~(1 << WAIT_FILL_OPTI_FLAG);
+        } else if (stage == 1) {
+            optimize_flags |= (1 << WAIT_COMPANY_NAME_OPTI_FLAG) 
+                            | (1 << WAIT_BACKGROUND_OPTI_FLAG);
+            optimize_flags &= ~(1 << WAIT_TEXT_OPTI_FLAG)
+                            & ~(1 << WAIT_FILL_OPTI_FLAG);
+        } else {  // full optimization
+            optimize_flags |= (1 << WAIT_COMPANY_NAME_OPTI_FLAG)
+                            | (1 << WAIT_TEXT_OPTI_FLAG);
+            optimize_flags &= ~(1 << WAIT_FILL_OPTI_FLAG)
+                            & ~(1 << WAIT_BACKGROUND_OPTI_FLAG);
+        }
     }
     draw_wait_menu(optimize_flags, stage);
 }
