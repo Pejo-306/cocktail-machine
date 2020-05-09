@@ -842,7 +842,7 @@ $EndComp
 Wire Wire Line
 	5550 3650 5550 3750
 NoConn ~ 5850 3750
-Text Notes 6650 1300 0    50   ~ 0
+Text Notes 6300 1300 0    50   ~ 0
 IR TRANSMITTER/RECEIVER
 Wire Wire Line
 	5150 4150 5100 4150

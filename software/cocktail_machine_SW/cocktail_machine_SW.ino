@@ -2,6 +2,7 @@
 
 #include "include/touchscreen.h"
 #include "include/GUI.h"
+#include "include/cocktail_making.h"
 
 void (*g_draw_menu_functions[])(void *) = {
     &adapted_draw_main_menu,
@@ -18,6 +19,8 @@ void (*g_process_menu_functions[])(struct touch_record_t) = {
 byte g_active_menu = MAIN_MENU;
 
 void setup() {
+    setup_relays();
+    
     // initialize LCD display
     lcd.Init_LCD();
     lcd.Set_Rotation(LCD_ROTATION_0DEG);

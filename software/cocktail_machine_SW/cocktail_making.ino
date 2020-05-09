@@ -10,6 +10,11 @@ static void _add_ice();
 
 static void _add_ingredient(byte ingredient, short quantity);
 
+void setup_relays() {
+    DDRC = 0x3F;
+    PORTC |= 0x3F;
+}
+
 void make_cocktail(byte recipe_index, bool should_add_ice) {
     struct recipe_t recipe = get_recipe(recipe_index);
     struct draw_wait_menu_params_t draw_wait_menu_params;
@@ -62,5 +67,8 @@ static void _add_ice() {
 }
 
 static void _add_ingredient(byte ingredient, short quantity) {
-    // TODO: add the appropriate ingredient in the appropriate quantity to the cocktail
+    PORTC &= ~(1 << ingredient);
+    delay((quantity / FLOW_RATE) * 1000);
+    PORTC |= (1 << ingredient);
+    delay(RELEASE_TIME);
 }
