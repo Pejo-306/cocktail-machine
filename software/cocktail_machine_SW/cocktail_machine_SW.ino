@@ -20,6 +20,7 @@ byte g_active_menu = MAIN_MENU;
 
 void setup() {
     setup_relays();
+    setup_servo();
     
     // initialize LCD display
     lcd.Init_LCD();

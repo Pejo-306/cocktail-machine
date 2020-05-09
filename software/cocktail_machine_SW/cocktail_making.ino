@@ -1,14 +1,23 @@
 #include "include/cocktail_making.h"
 
+#include <Servo.h>
+
 #include "include/cocktail_machine_SW.h"
 #include "include/GUI.h"
 #include "include/recipes.h"
+
+Servo ice_servo;
 
 static bool _has_placed_cup();
 
 static void _add_ice();
 
 static void _add_ingredient(byte ingredient, short quantity);
+
+void setup_servo() {
+    ice_servo.attach(ICE_SERVO_PIN);
+    ice_servo.write(0);
+}
 
 void setup_relays() {
     DDRC = 0x3F;
@@ -63,7 +72,9 @@ static bool _has_placed_cup() {
 }
 
 static void _add_ice() {
-    // TODO: add ice to the cocktail via Servo manipulation
+    ice_servo.write(180);
+    delay(ICE_DELAY);
+    ice_servo.write(0);
 }
 
 static void _add_ingredient(byte ingredient, short quantity) {
