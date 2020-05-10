@@ -5,7 +5,7 @@ $Descr A4 11693 8268
 encoding utf-8
 Sheet 1 2
 Title "Cocktail Machine"
-Date "2020-04-30"
+Date "2020-05-10"
 Rev "1"
 Comp "Pesho & Valka Inc."
 Comment1 ""
@@ -24,145 +24,8 @@ F 3 "https://www.arduino.cc/en/Main/arduinoBoardUno" H 5450 5800 50  0001 C CNN
 	1    5650 4750
 	1    0    0    -1  
 $EndComp
-$Comp
-L Interface_Optical:TSDP341xx U?
-U 1 1 5E9465A8
-P 8750 2100
-F 0 "U?" H 8738 2525 50  0000 C CNN
-F 1 "VS1838B" H 8738 2434 50  0000 C CNN
-F 2 "OptoDevice:Vishay_MOLD-3Pin" H 8700 1725 50  0001 C CNN
-F 3 "http://www.vishay.com/docs/82667/tsdp341.pdf" H 9400 2400 50  0001 C CNN
-	1    8750 2100
-	1    0    0    -1  
-$EndComp
-$Comp
-L Device:CP C?
-U 1 1 5E94758E
-P 9800 2350
-F 0 "C?" H 9850 2450 50  0000 L CNN
-F 1 "100uF/16V" H 9850 2250 50  0000 L CNN
-F 2 "" H 9838 2200 50  0001 C CNN
-F 3 "~" H 9800 2350 50  0001 C CNN
-	1    9800 2350
-	1    0    0    -1  
-$EndComp
-Wire Wire Line
-	9150 2300 9200 2300
-Wire Wire Line
-	9200 2300 9200 2350
-$Comp
-L power:GND #PWR?
-U 1 1 5E9513E3
-P 9200 2350
-F 0 "#PWR?" H 9200 2100 50  0001 C CNN
-F 1 "GND" H 9205 2177 50  0000 C CNN
-F 2 "" H 9200 2350 50  0001 C CNN
-F 3 "" H 9200 2350 50  0001 C CNN
-	1    9200 2350
-	1    0    0    -1  
-$EndComp
-$Comp
-L Device:R R?
-U 1 1 5E951E9B
-P 10100 1700
-F 0 "R?" V 9893 1700 50  0000 C CNN
-F 1 "100R" V 9984 1700 50  0000 C CNN
-F 2 "" V 10030 1700 50  0001 C CNN
-F 3 "~" H 10100 1700 50  0001 C CNN
-	1    10100 1700
-	0    1    1    0   
-$EndComp
-$Comp
-L Device:R R?
-U 1 1 5E952138
-P 10300 1900
-F 0 "R?" H 10370 1946 50  0000 L CNN
-F 1 "20k" H 10370 1855 50  0000 L CNN
-F 2 "" V 10230 1900 50  0001 C CNN
-F 3 "~" H 10300 1900 50  0001 C CNN
-	1    10300 1900
-	1    0    0    -1  
-$EndComp
-Text Label 10500 2100 0    50   ~ 0
+Text Label 8450 2450 0    50   ~ 0
 IR_RX
-Wire Wire Line
-	9150 2100 10300 2100
-Wire Wire Line
-	10300 2100 10300 2050
-Connection ~ 10300 2100
-Wire Wire Line
-	10300 2100 10500 2100
-Wire Wire Line
-	10300 1750 10300 1700
-Wire Wire Line
-	10300 1700 10250 1700
-Wire Wire Line
-	9150 1900 9400 1900
-$Comp
-L Device:C C?
-U 1 1 5E95CF9F
-P 9400 2350
-F 0 "C?" H 9450 2450 50  0000 L CNN
-F 1 "100nF" H 9450 2250 50  0000 L CNN
-F 2 "" H 9438 2200 50  0001 C CNN
-F 3 "~" H 9400 2350 50  0001 C CNN
-	1    9400 2350
-	1    0    0    -1  
-$EndComp
-Wire Wire Line
-	9400 2200 9400 1900
-Connection ~ 9400 1900
-Wire Wire Line
-	9400 2500 9400 2550
-$Comp
-L power:GND #PWR?
-U 1 1 5E9605F1
-P 9400 2550
-F 0 "#PWR?" H 9400 2300 50  0001 C CNN
-F 1 "GND" H 9405 2377 50  0000 C CNN
-F 2 "" H 9400 2550 50  0001 C CNN
-F 3 "" H 9400 2550 50  0001 C CNN
-	1    9400 2550
-	1    0    0    -1  
-$EndComp
-Wire Wire Line
-	9800 2200 9800 1900
-Wire Wire Line
-	9400 1900 9800 1900
-Wire Wire Line
-	9800 2500 9800 2550
-$Comp
-L power:GND #PWR?
-U 1 1 5E964CB4
-P 9800 2550
-F 0 "#PWR?" H 9800 2300 50  0001 C CNN
-F 1 "GND" H 9805 2377 50  0000 C CNN
-F 2 "" H 9800 2550 50  0001 C CNN
-F 3 "" H 9800 2550 50  0001 C CNN
-	1    9800 2550
-	1    0    0    -1  
-$EndComp
-Wire Wire Line
-	9800 1900 9900 1900
-Wire Wire Line
-	9900 1900 9900 1700
-Wire Wire Line
-	9900 1700 9950 1700
-Connection ~ 9800 1900
-Wire Wire Line
-	10300 1700 10300 1600
-Connection ~ 10300 1700
-$Comp
-L power:+5V #PWR?
-U 1 1 5E9657E5
-P 10300 1600
-F 0 "#PWR?" H 10300 1450 50  0001 C CNN
-F 1 "+5V" H 10315 1773 50  0000 C CNN
-F 2 "" H 10300 1600 50  0001 C CNN
-F 3 "" H 10300 1600 50  0001 C CNN
-	1    10300 1600
-	1    0    0    -1  
-$EndComp
 Wire Wire Line
 	7650 1650 7650 1600
 $Comp
@@ -491,17 +354,15 @@ Wire Wire Line
 	7000 2600 6950 2600
 Text Label 6600 2600 2    50   ~ 0
 IR_TX
-Text Label 5100 4250 2    50   ~ 0
+Text Label 5100 4350 2    50   ~ 0
 IR_RX
-Text Label 5100 4650 2    50   ~ 0
+Text Label 5100 4250 2    50   ~ 0
 IR_TX
 NoConn ~ 6150 5450
 NoConn ~ 6150 5550
 NoConn ~ 6150 4550
 NoConn ~ 6150 4350
 NoConn ~ 6150 4150
-Wire Notes Line
-	10800 3150 10800 1300
 $Comp
 L Connector:Barrel_Jack J?
 U 1 1 5EA69E6D
@@ -850,9 +711,9 @@ Wire Wire Line
 	5150 4250 5100 4250
 Wire Wire Line
 	5150 4350 5100 4350
-Text Label 5100 4350 2    50   ~ 0
-T_IRQ
 Text Label 5100 4550 2    50   ~ 0
+T_IRQ
+Text Label 5100 4650 2    50   ~ 0
 T_DO
 Text Label 5100 4150 2    50   ~ 0
 T_DIN
@@ -875,10 +736,6 @@ Wire Wire Line
 	6650 2600 6600 2600
 Wire Notes Line
 	6300 1300 6300 3150
-Wire Notes Line
-	6300 3150 10800 3150
-Wire Notes Line
-	6300 1300 10800 1300
 $Comp
 L Device:LED D?
 U 1 1 5E943420
@@ -901,4 +758,65 @@ F 3 "~" H 7650 2200 50  0001 C CNN
 	1    7650 2200
 	1    0    0    -1  
 $EndComp
+$Comp
+L Device:D_Photo D?
+U 1 1 5EB8F707
+P 8350 2300
+F 0 "D?" V 8254 2221 50  0000 R CNN
+F 1 "IR_PHOTO_D" V 8345 2221 50  0000 R CNN
+F 2 "" H 8300 2300 50  0001 C CNN
+F 3 "~" H 8300 2300 50  0001 C CNN
+	1    8350 2300
+	0    -1   1    0   
+$EndComp
+Wire Wire Line
+	8350 2100 8350 2050
+$Comp
+L power:+5V #PWR?
+U 1 1 5EB93ADC
+P 8350 2050
+F 0 "#PWR?" H 8350 1900 50  0001 C CNN
+F 1 "+5V" H 8365 2223 50  0000 C CNN
+F 2 "" H 8350 2050 50  0001 C CNN
+F 3 "" H 8350 2050 50  0001 C CNN
+	1    8350 2050
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	8350 2400 8350 2450
+$Comp
+L Device:R R?
+U 1 1 5EB96DF6
+P 8350 2650
+F 0 "R?" H 8420 2696 50  0000 L CNN
+F 1 "10k" H 8420 2605 50  0000 L CNN
+F 2 "" V 8280 2650 50  0001 C CNN
+F 3 "~" H 8350 2650 50  0001 C CNN
+	1    8350 2650
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	8350 2800 8350 2850
+$Comp
+L power:GND #PWR?
+U 1 1 5EB9A137
+P 8350 2850
+F 0 "#PWR?" H 8350 2600 50  0001 C CNN
+F 1 "GND" H 8355 2677 50  0000 C CNN
+F 2 "" H 8350 2850 50  0001 C CNN
+F 3 "" H 8350 2850 50  0001 C CNN
+	1    8350 2850
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	8350 2450 8450 2450
+Connection ~ 8350 2450
+Wire Wire Line
+	8350 2450 8350 2500
+Wire Notes Line
+	6300 3150 8950 3150
+Wire Notes Line
+	8950 3150 8950 1300
+Wire Notes Line
+	8950 1300 6300 1300
 $EndSCHEMATC
