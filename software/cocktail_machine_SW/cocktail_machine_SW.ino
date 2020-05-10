@@ -21,7 +21,8 @@ byte g_active_menu = MAIN_MENU;
 void setup() {
     setup_relays();
     setup_servo();
-    
+    setup_IR();
+
     // initialize LCD display
     lcd.Init_LCD();
     lcd.Set_Rotation(LCD_ROTATION_0DEG);

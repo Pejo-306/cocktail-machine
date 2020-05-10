@@ -14,8 +14,8 @@
 #define T_CLK       7
 #define T_CS        6
 #define T_DIN       0
-#define T_DOUT      4
-#define T_IRQ       2
+#define T_DOUT      5
+#define T_IRQ       4
 
 #define LCD_ROTATION_0DEG       0
 #define LCD_ROTATION_90DEG      1
