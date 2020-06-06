@@ -7,7 +7,7 @@
 #define ICE_SERVO_PIN       3
 #define ICE_DELAY           2000 // ms
 
-#define FLOW_RATE           5 // ml/s
+#define FLOW_RATE           0.5 // ml/s
 #define RELEASE_TIME        10 // ms
 
 #define IR_TX_PIN           1
