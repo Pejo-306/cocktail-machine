@@ -5,7 +5,7 @@ $Descr A4 11693 8268
 encoding utf-8
 Sheet 1 2
 Title "Cocktail Machine"
-Date "2020-06-06"
+Date "2020-06-10"
 Rev "1"
 Comp "Pesho & Valka Inc."
 Comment1 ""
@@ -122,23 +122,17 @@ F 3 "http://forums.parallax.com/uploads/attachments/46831/74481.png" H 7950 3910
 	1    7950 4100
 	1    0    0    -1  
 $EndComp
-Wire Wire Line
-	7650 4200 7600 4200
-Wire Wire Line
-	7600 4200 7600 4250
 $Comp
 L power:GND #PWR018
 U 1 1 5EBAB346
-P 7600 4250
-F 0 "#PWR018" H 7600 4000 50  0001 C CNN
-F 1 "GND" H 7605 4077 50  0000 C CNN
-F 2 "" H 7600 4250 50  0001 C CNN
-F 3 "" H 7600 4250 50  0001 C CNN
-	1    7600 4250
+P 7450 4550
+F 0 "#PWR018" H 7450 4300 50  0001 C CNN
+F 1 "GND" H 7455 4377 50  0000 C CNN
+F 2 "" H 7450 4550 50  0001 C CNN
+F 3 "" H 7450 4550 50  0001 C CNN
+	1    7450 4550
 	1    0    0    -1  
 $EndComp
-Wire Wire Line
-	7650 4100 7600 4100
 Wire Wire Line
 	7650 4000 7600 4000
 Text Label 7600 4000 2    50   ~ 0
@@ -146,12 +140,12 @@ MOTOR_PWM
 $Comp
 L power:+5V #PWR017
 U 1 1 5EBAD44E
-P 7600 4100
-F 0 "#PWR017" H 7600 3950 50  0001 C CNN
-F 1 "+5V" V 7615 4228 50  0000 L CNN
-F 2 "" H 7600 4100 50  0001 C CNN
-F 3 "" H 7600 4100 50  0001 C CNN
-	1    7600 4100
+P 7400 4100
+F 0 "#PWR017" H 7400 3950 50  0001 C CNN
+F 1 "+5V" V 7415 4228 50  0000 L CNN
+F 2 "" H 7400 4100 50  0001 C CNN
+F 3 "" H 7400 4100 50  0001 C CNN
+	1    7400 4100
 	0    -1   -1   0   
 $EndComp
 Wire Wire Line
@@ -819,4 +813,33 @@ Wire Notes Line
 	8950 3150 8950 1300
 Wire Notes Line
 	8950 1300 6300 1300
+$Comp
+L Device:CP C1
+U 1 1 5EE17430
+P 7450 4300
+F 0 "C1" H 7250 4350 50  0000 L CNN
+F 1 "470uF/16V" H 6900 4250 50  0000 L CNN
+F 2 "" H 7488 4150 50  0001 C CNN
+F 3 "~" H 7450 4300 50  0001 C CNN
+	1    7450 4300
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	7400 4100 7450 4100
+Wire Wire Line
+	7450 4450 7450 4500
+Wire Wire Line
+	7450 4500 7600 4500
+Wire Wire Line
+	7600 4500 7600 4200
+Wire Wire Line
+	7600 4200 7650 4200
+Connection ~ 7450 4500
+Wire Wire Line
+	7450 4500 7450 4550
+Wire Wire Line
+	7450 4150 7450 4100
+Connection ~ 7450 4100
+Wire Wire Line
+	7450 4100 7650 4100
 $EndSCHEMATC
